@@ -4,7 +4,7 @@
 <SignConfigXML>
   <!-- AnyCPU Release sign job -->
   <job platform="AnyCPU" configuration="Release" dest="__OUTPATHROOT__\signed" jobname="PowerShellGetCompat" approvers="vigarg;gstolt">
-    <file src="__INPATHROOT__\PowerShellGet.psd1" signType="AuthenticodeFormer" dest="__OUTPATHROOT__\PowerShellGetCompat.psd1" />
-    <file src="__INPATHROOT__\PSModule.psm1" signType="AuthenticodeFormer" dest="__OUTPATHROOT__\PowerShellGetCompat.psm1" />
+    <file src="__INPATHROOT__\src\PowerShellGet.psd1" signType="AuthenticodeFormer" dest="__OUTPATHROOT__\PowerShellGetCompat.psd1" />
+    <file src="__INPATHROOT__\src\PSModule.psm1" signType="AuthenticodeFormer" dest="__OUTPATHROOT__\PowerShellGetCompat.psm1" />
   </job>
 </SignConfigXML>

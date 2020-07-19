@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-# RootModule = ''
+RootModule = 'PowerShellGetCompat.psm1'
 
 # Version number of this module.
 ModuleVersion = '0.0.1'
@@ -69,7 +69,18 @@ Copyright = '(c) americks. All rights reserved.'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @()
+FunctionsToExport = @( "Find-Command", "Find-DscResource", "Find-Module", "Find-RoleCapability", "Find-Script",
+    "Get-InstalledModule", "Get-InstalledScript", "Get-PSRepository",
+    "Install-Module", "Install-Script",
+    "Publish-Module", "Publish-Script",
+    "Register-PSRepository",
+    "Save-Module", "Save-Script",
+    "Set-PSRepository",
+    "Uninstall-Module", "Uninstall-Script",
+    "Unregister-PSRepository",
+    "Update-Module", "Update-Script"
+)
+
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

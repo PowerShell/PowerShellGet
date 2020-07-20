@@ -51,9 +51,15 @@
             'Mac',
             'Windows')
 
-            # LicenseUri = ''
-            # ProjectUri = ''
-            ReleaseNotes = ''
+            LicenseUri = 'https://github.com/PowerShell/CompatPowerShellGet/blob/master/LICENSE'
+            ProjectUri = 'https://github.com/PowerShell/CompatPowerShellGet'
+            ReleaseNotes = @'
+### 1.0.0
+* Initial release
+
+## For full history of release notes see changelog:
+https://github.com/PowerShell/CompatPowerShellGet/blob/master/CHANGELOG.md
+'@
         }
     }
 

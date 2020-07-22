@@ -3,8 +3,8 @@
 <!-- Config files for Azure DevOps code-signing pipeline. -->
 <SignConfigXML>
   <!-- AnyCPU Release sign job -->
-  <job platform="AnyCPU" configuration="Release" dest="__OUTPATHROOT__\signed" jobname="CompatPowerShellGet" approvers="vigarg;gstolt">
-    <file src="__INPATHROOT__\src\CompatPowerShellGet.psd1" signType="AuthenticodeFormer" dest="__OUTPATHROOT__\CompatPowerShellGet.psd1" />
-    <file src="__INPATHROOT__\src\CompatPowerShellGet.psm1" signType="AuthenticodeFormer" dest="__OUTPATHROOT__\CompatPowerShellGet.psm1" />
+  <job platform="AnyCPU" configuration="Release" dest="__OUTPATHROOT__\signed" jobname="PowerShellGetCompat" approvers="vigarg;gstolt">
+    <file src="__INPATHROOT__\src\PowerShellGetCompat.psd1" signType="AuthenticodeFormer" dest="__OUTPATHROOT__\PowerShellGetCompat.psd1" />
+    <file src="__INPATHROOT__\src\PowerShellGetCompat.psm1" signType="AuthenticodeFormer" dest="__OUTPATHROOT__\PowerShellGetCompat.psm1" />
   </job>
 </SignConfigXML>

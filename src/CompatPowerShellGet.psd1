@@ -16,27 +16,27 @@
     Description = 'PowerShellGetCompat is a compatibility module that allows use of PowerShellGet 2.x (and below) cmdlet syntax with PowerShellGet 3.0 (and newer) functionality by making a best effort mapping between the cmdlet interfaces of both versions of the module.'
     PowerShellVersion = '3.0'
     FunctionsToExport = @( 
-        "__ProxyFind-Command", 
-        "__ProxyFind-DscResource", 
-        "__ProxyFind-Module",
-        "__ProxyFind-RoleCapability",
-        "__ProxyFind-Script",
-        "__ProxyGet-InstalledModule",
-        "__ProxyGet-InstalledScript",
-        "__ProxyGet-PSRepository",
-        "__ProxyInstall-Module",
-        "__ProxyInstall-Script",
-        "__ProxyPublish-Module",
-        "__ProxyPublish-Script",
-        "__ProxyRegister-PSRepository",
-        "__ProxySave-Module",
-        "__ProxySave-Script",
-        "__ProxySet-PSRepository",
-        "__ProxyUninstall-Module",
-        "__ProxyUninstall-Script",
-        "__ProxyUnregister-PSRepository",
-        "__ProxyUpdate-Module",
-        "__ProxyUpdate-Script"
+        "Find-CommandProxy", 
+        "Find-DscResourceProxy", 
+        "Find-ModuleProxy",
+        "Find-RoleCapabilityProxy",
+        "Find-ScriptProxy",
+        "Get-InstalledModuleProxy",
+        "Get-InstalledScriptProxy",
+        "Get-PSRepositoryProxy",
+        "Install-ModuleProxy",
+        "Install-ScriptProxy",
+        "Publish-ModuleProxy",
+        "Publish-ScriptProxy",
+        "Register-PSRepositoryProxy",
+        "Save-ModuleProxy",
+        "Save-ScriptProxy",
+        "Set-PSRepositoryProxy",
+        "Uninstall-ModuleProxy",
+        "Uninstall-ScriptProxy",
+        "Unregister-PSRepositoryProxy",
+        "Update-ModuleProxy",
+        "Update-ScriptProxy"
     )
     CmdletsToExport = @()
     VariablesToExport = '*'

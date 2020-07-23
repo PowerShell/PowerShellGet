@@ -1153,9 +1153,6 @@ begin
 
     # PARAMETER MAP
     # add new specifier 
-
-
-    $PSBoundParameters['Type'] = 'module'
     # handle version changes
     $verArgs = @{}
     if ( $PSBoundParameters['MinimumVersion'] )     { $null = $PSBoundParameters.Remove('MinimumVersion'); $verArgs['MinimumVersion'] = $MinumumVersion }
@@ -1296,8 +1293,6 @@ begin
 
     # PARAMETER MAP
     # add new specifier 
-
-    $PSBoundParameters['Type'] = 'script'
     # handle version changes
     $verArgs = @{}
     if ( $PSBoundParameters['MinimumVersion'] )     { $null = $PSBoundParameters.Remove('MinimumVersion'); $verArgs['MinimumVersion'] = $MinumumVersion }

@@ -196,8 +196,7 @@ function Convert-ToUri ( [string]$location ) {
 # In some cases we have a completely new parameter which we need to set.
 ####
 ####
-function Find-CommandProxy {
-[Alias('Find-Command')]
+function Find-Command {
 [CmdletBinding(HelpUri='https://go.microsoft.com/fwlink/?LinkId=733636')]
 param(
     [Parameter(Position=0)]
@@ -320,8 +319,7 @@ end
 }
 
 
-function Find-DscResourceProxy {
-[Alias('Find-DscResource')]
+function Find-DscResource {
 [CmdletBinding(HelpUri='https://go.microsoft.com/fwlink/?LinkId=517196')]
 param(
     [Parameter(Position=0)]
@@ -441,8 +439,7 @@ end
 
 }
 
-function Find-ModuleProxy {
-[Alias('Find-Module')]
+function Find-Module {
 [CmdletBinding(HelpUri='https://go.microsoft.com/fwlink/?LinkID=398574')]
 param(
     [Parameter(Position=0, ValueFromPipelineByPropertyName=$true)]
@@ -588,8 +585,7 @@ end
 
 }
 
-function Find-RoleCapabilityProxy {
-[Alias('Find-RoleCapability')]
+function Find-RoleCapability {
 [CmdletBinding(HelpUri='https://go.microsoft.com/fwlink/?LinkId=718029')]
 param(
     [Parameter(Position=0)]
@@ -707,8 +703,7 @@ end
 
 }
 
-function Find-ScriptProxy {
-[Alias('Find-Script')]
+function Find-Script {
 [CmdletBinding(HelpUri='https://go.microsoft.com/fwlink/?LinkId=619785')]
 param(
     [Parameter(Position=0, ValueFromPipelineByPropertyName=$true)]
@@ -846,8 +841,7 @@ end
 
 }
 
-function Get-InstalledModuleProxy {
-[Alias('Get-InstalledModule')]
+function Get-InstalledModule {
 [CmdletBinding(HelpUri='https://go.microsoft.com/fwlink/?LinkId=526863')]
 param(
     [Parameter(Position=0, ValueFromPipelineByPropertyName=$true)]
@@ -931,8 +925,7 @@ end
 
 }
 
-function Get-InstalledScriptProxy {
-[Alias('Get-InstalledScript')]
+function Get-InstalledScript {
 [CmdletBinding(HelpUri='https://go.microsoft.com/fwlink/?LinkId=619790')]
 param(
     [Parameter(Position=0, ValueFromPipelineByPropertyName=$true)]
@@ -1014,8 +1007,7 @@ end
 
 }
 
-function Get-PSRepositoryProxy {
-[Alias('Get-PSRepository')]
+function Get-PSRepository {
 [CmdletBinding(HelpUri='https://go.microsoft.com/fwlink/?LinkID=517127')]
 param(
     [Parameter(Position=0, ValueFromPipelineByPropertyName=$true)]
@@ -1069,8 +1061,7 @@ end
 
 }
 
-function Install-ModuleProxy {
-[Alias('Install-Module')]
+function Install-Module {
 [CmdletBinding(DefaultParameterSetName='NameParameterSet', SupportsShouldProcess=$true, ConfirmImpact='Medium', HelpUri='https://go.microsoft.com/fwlink/?LinkID=398573')]
 param(
     [Parameter(ParameterSetName='NameParameterSet', Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true)]
@@ -1212,8 +1203,7 @@ end
 
 }
 
-function Install-ScriptProxy {
-[Alias('Install-Script')]
+function Install-Script {
 [CmdletBinding(DefaultParameterSetName='NameParameterSet', SupportsShouldProcess=$true, ConfirmImpact='Medium', HelpUri='https://go.microsoft.com/fwlink/?LinkId=619784')]
 param(
     [Parameter(ParameterSetName='NameParameterSet', Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true)]
@@ -1348,8 +1338,7 @@ end
 
 }
 
-function Publish-ModuleProxy {
-[Alias('Publish-Module')]
+function Publish-Module {
 [CmdletBinding(DefaultParameterSetName='ModuleNameParameterSet', SupportsShouldProcess=$true, ConfirmImpact='Medium', PositionalBinding=$false, HelpUri='https://go.microsoft.com/fwlink/?LinkID=398575')]
 param(
     [Parameter(ParameterSetName='ModuleNameParameterSet', Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
@@ -1477,8 +1466,7 @@ end
 
 }
 
-function Publish-ScriptProxy {
-[Alias('Publish-Script')]
+function Publish-Script {
 [CmdletBinding(DefaultParameterSetName='PathParameterSet', SupportsShouldProcess=$true, ConfirmImpact='Medium', PositionalBinding=$false, HelpUri='https://go.microsoft.com/fwlink/?LinkId=619788')]
 param(
     [Parameter(ParameterSetName='PathParameterSet', Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
@@ -1562,8 +1550,7 @@ end
 
 }
 
-function Register-PSRepositoryProxy {
-[Alias('Register-PSRepository')]
+function Register-PSRepository {
 [CmdletBinding(DefaultParameterSetName='NameParameterSet', HelpUri='https://go.microsoft.com/fwlink/?LinkID=517129')]
 param(
     [Parameter(ParameterSetName='NameParameterSet', Mandatory=$true, Position=0)]
@@ -1685,8 +1672,7 @@ end
 
 }
 
-function Save-ModuleProxy {
-[Alias('Save-Module')]
+function Save-Module {
 [CmdletBinding(DefaultParameterSetName='NameAndPathParameterSet', SupportsShouldProcess=$true, ConfirmImpact='Medium', HelpUri='https://go.microsoft.com/fwlink/?LinkId=531351')]
 param(
     [Parameter(ParameterSetName='NameAndLiteralPathParameterSet', Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true)]
@@ -1834,8 +1820,7 @@ end
 
 }
 
-function Save-ScriptProxy {
-[Alias('Save-Script')]
+function Save-Script {
 [CmdletBinding(DefaultParameterSetName='NameAndPathParameterSet', SupportsShouldProcess=$true, ConfirmImpact='Medium', HelpUri='https://go.microsoft.com/fwlink/?LinkId=619786')]
 param(
     [Parameter(ParameterSetName='NameAndLiteralPathParameterSet', Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true)]
@@ -1982,8 +1967,7 @@ end
 
 }
 
-function Set-PSRepositoryProxy {
-[Alias('Set-PSRepository')]
+function Set-PSRepository {
 [CmdletBinding(PositionalBinding=$false, HelpUri='https://go.microsoft.com/fwlink/?LinkID=517128')]
 param(
     [Parameter(Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true)]
@@ -2102,8 +2086,7 @@ end
 
 }
 
-function Uninstall-ModuleProxy {
-[Alias('Uninstall-Module')]
+function Uninstall-Module {
 [CmdletBinding(DefaultParameterSetName='NameParameterSet', SupportsShouldProcess=$true, ConfirmImpact='Medium', HelpUri='https://go.microsoft.com/fwlink/?LinkId=526864')]
 param(
     [Parameter(ParameterSetName='NameParameterSet', Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true)]
@@ -2204,8 +2187,7 @@ end
 
 }
 
-function Uninstall-ScriptProxy {
-[Alias('Uninstall-Script')]
+function Uninstall-Script {
 [CmdletBinding(DefaultParameterSetName='NameParameterSet', SupportsShouldProcess=$true, ConfirmImpact='Medium', HelpUri='https://go.microsoft.com/fwlink/?LinkId=619789')]
 param(
     [Parameter(ParameterSetName='NameParameterSet', Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true)]
@@ -2301,8 +2283,7 @@ end
 
 }
 
-function Unregister-PSRepositoryProxy {
-[Alias('Unregister-PSRepository')]
+function Unregister-PSRepository {
 [CmdletBinding(HelpUri='https://go.microsoft.com/fwlink/?LinkID=517130')]
 param(
     [Parameter(Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true)]
@@ -2360,8 +2341,7 @@ end
 
 }
 
-function Update-ModuleProxy {
-[Alias('Update-Module')]
+function Update-Module {
 [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact='Medium', HelpUri='https://go.microsoft.com/fwlink/?LinkID=398576')]
 param(
     [Parameter(Position=0, ValueFromPipelineByPropertyName=$true)]
@@ -2476,8 +2456,7 @@ end
 
 }
 
-function Update-ScriptProxy {
-[Alias('Update-Script')]
+function Update-Script {
 [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact='Medium', HelpUri='https://go.microsoft.com/fwlink/?LinkId=619787')]
 param(
     [Parameter(Position=0, ValueFromPipelineByPropertyName=$true)]

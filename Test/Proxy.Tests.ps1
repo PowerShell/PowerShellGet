@@ -13,7 +13,7 @@ Describe "Proxies exist" {
             $skipTest = $true
         }
         # be sure that this module is loaded
-        $proxyModuleName = "PowerShellGetCompat"
+        $proxyModuleName = "CompatPowerShellGet"
         $unloadModule = $false
         if ( ! (Get-Module $proxyModuleName) ) {
             $unloadModule = $true

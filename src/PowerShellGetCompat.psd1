@@ -8,7 +8,7 @@
 
 @{
     RootModule = 'PowerShellGetCompat.psm1'
-    ModuleVersion = '1.0.0'
+    ModuleVersion = '0.0.1'
     GUID = '68ec3ec1-55bf-42f8-9add-d224e5c76548'
     Author = 'Microsoft Corporation'
     CompanyName = 'Microsoft Corporation'
@@ -64,7 +64,6 @@
         "Update-Script"
     )
 
-    RequiredModules   = @(@{ModuleName = 'PowerShellGet'; ModuleVersion = '3.0.0-beta7' })
     PrivateData = @{
         PSData = @{
             Tags = @('PackageManagement',
@@ -77,7 +76,7 @@
             LicenseUri = 'https://github.com/PowerShell/PowerShellGetCompat/blob/master/LICENSE'
             ProjectUri = 'https://github.com/PowerShell/PowerShellGetCompat'
             ReleaseNotes = @'
-### 1.0.0
+### 0.0.1
 * Initial release
 
 ## For full history of release notes see changelog:

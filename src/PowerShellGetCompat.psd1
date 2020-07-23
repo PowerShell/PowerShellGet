@@ -64,6 +64,7 @@
         "Update-Script"
     )
 
+    RequiredModules   = @(@{ModuleName = 'PowerShellGet'; ModuleVersion = '3.0.0-beta7' })
     PrivateData = @{
         PSData = @{
             Tags = @('PackageManagement',

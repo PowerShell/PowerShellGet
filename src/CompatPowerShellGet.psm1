@@ -2567,30 +2567,6 @@ end
 }
 
 $functionsToExport = @(
-    "Find-CommandProxy", 
-    "Find-DscResourceProxy", 
-    "Find-ModuleProxy",
-    "Find-RoleCapabilityProxy",
-    "Find-ScriptProxy",
-    "Get-InstalledModuleProxy",
-    "Get-InstalledScriptProxy",
-    "Get-PSRepositoryProxy",
-    "Install-ModuleProxy",
-    "Install-ScriptProxy",
-    "Publish-ModuleProxy",
-    "Publish-ScriptProxy",
-    "Register-PSRepositoryProxy",
-    "Save-ModuleProxy",
-    "Save-ScriptProxy",
-    "Set-PSRepositoryProxy",
-    "Uninstall-ModuleProxy",
-    "Uninstall-ScriptProxy",
-    "Unregister-PSRepositoryProxy",
-    "Update-ModuleProxy",
-    "Update-ScriptProxy"
-)
-
-$aliasesToExport = @(
     "Find-Command",
     "Find-DscResource",
     "Find-Module",
@@ -2614,4 +2590,4 @@ $aliasesToExport = @(
     "Update-Script"
 )
 
-export-ModuleMember -Function $functionsToExport -Alias $aliasesToExport
+export-ModuleMember -Function $functionsToExport

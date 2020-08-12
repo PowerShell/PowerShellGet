@@ -8,7 +8,7 @@
 
 @{
     RootModule = 'CompatPowerShellGet.psm1'
-    ModuleVersion = '0.0.1'
+    ModuleVersion = '0.0.2'
     GUID = '68ec3ec1-55bf-42f8-9add-d224e5c76548'
     Author = 'Microsoft Corporation'
     CompanyName = 'Microsoft Corporation'
@@ -54,6 +54,10 @@
             LicenseUri = 'https://github.com/PowerShell/CompatPowerShellGet/blob/master/LICENSE'
             ProjectUri = 'https://github.com/PowerShell/CompatPowerShellGet'
             ReleaseNotes = @'
+### 0.0.2
+* Bug Fix
+- Remove -Force parameter when calling into v3 cmdlets
+
 ### 0.0.1
 * Initial release
 

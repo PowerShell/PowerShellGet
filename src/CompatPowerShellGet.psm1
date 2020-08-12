@@ -1165,6 +1165,8 @@ begin
     if ( $PSBoundParameters['SkipPublisherCheck'] ) { $null = $PSBoundParameters.Remove('SkipPublisherCheck') }
     if ( $PSBoundParameters['InputObject'] )        { $null = $PSBoundParameters.Remove('InputObject') }
     if ( $PSBoundParameters['PassThru'] )           { $null = $PSBoundParameters.Remove('PassThru') }
+    if ( $PSBoundParameters['Force'] )              { $null = $PSBoundParameters.Remove('Force') }
+
     # END PARAMETER MAP
 
         $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Install-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
@@ -1300,6 +1302,8 @@ begin
     if ( $PSBoundParameters['Proxy'] )            { $null = $PSBoundParameters.Remove('Proxy') }
     if ( $PSBoundParameters['ProxyCredential'] )  { $null = $PSBoundParameters.Remove('ProxyCredential') }
     if ( $PSBoundParameters['PassThru'] )         { $null = $PSBoundParameters.Remove('PassThru') }
+    if ( $PSBoundParameters['Force'] )            { $null = $PSBoundParameters.Remove('Force') }
+
     # END PARAMETER MAP
 
         $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Install-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
@@ -2149,6 +2153,7 @@ begin
     # Parameter Deletions (unsupported in v3)
     if ( $PSBoundParameters['InputObject'] )         { $null = $PSBoundParameters.Remove('InputObject') }
     if ( $PSBoundParameters['AllowPrerelease'] )     { $null = $PSBoundParameters.Remove('AllowPrerelease') }
+    if ( $PSBoundParameters['Force'] )               { $null = $PSBoundParameters.Remove('Force') }
     # END PARAMETER MAP
 
         $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Uninstall-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
@@ -2243,8 +2248,10 @@ begin
         $PSBoundParameters['Version'] = $ver
     }
     # Parameter Deletions (unsupported in v3)
-    if ( $PSBoundParameters['InputObject'] )     { $null = $PSBoundParameters.Remove('InputObject') }
+    if ( $PSBoundParameters['InputObject'] )         { $null = $PSBoundParameters.Remove('InputObject') }
     if ( $PSBoundParameters['AllowPrerelease'] )     { $null = $PSBoundParameters.Remove('AllowPrerelease') }
+    if ( $PSBoundParameters['Force'] )               { $null = $PSBoundParameters.Remove('Force') }
+
     # END PARAMETER MAP
 
         $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Uninstall-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
@@ -2418,6 +2425,8 @@ begin
     if ( $PSBoundParameters['Proxy'] )              { $null = $PSBoundParameters.Remove('Proxy') }
     if ( $PSBoundParameters['ProxyCredential'] )    { $null = $PSBoundParameters.Remove('ProxyCredential') }
     if ( $PSBoundParameters['PassThru'] )           { $null = $PSBoundParameters.Remove('PassThru') }
+    if ( $PSBoundParameters['Force'] )              { $null = $PSBoundParameters.Remove('Force') }
+
     # END PARAMETER MAP
 
         $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Update-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
@@ -2525,9 +2534,11 @@ begin
     # Parameter translations
     if ( $PSBoundParameters['AllowPrerelease'] )    { $null = $PSBoundParameters.Remove('AllowPrerelease'); $PSBoundParameters['Prerelease'] = $AllowPrerelease }
     # Parameter Deletions (unsupported in v3)
-    if ( $PSBoundParameters['Proxy'] )             { $null = $PSBoundParameters.Remove('Proxy') }
-    if ( $PSBoundParameters['ProxyCredential'] )   { $null = $PSBoundParameters.Remove('ProxyCredential') }
-    if ( $PSBoundParameters['PassThru'] )          { $null = $PSBoundParameters.Remove('PassThru') }
+    if ( $PSBoundParameters['Proxy'] )              { $null = $PSBoundParameters.Remove('Proxy') }
+    if ( $PSBoundParameters['ProxyCredential'] )    { $null = $PSBoundParameters.Remove('ProxyCredential') }
+    if ( $PSBoundParameters['PassThru'] )           { $null = $PSBoundParameters.Remove('PassThru') }
+    if ( $PSBoundParameters['Force'] )              { $null = $PSBoundParameters.Remove('Force') }
+
     # END PARAMETER MAP
 
         $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Update-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)

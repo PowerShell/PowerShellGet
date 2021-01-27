@@ -115,9 +115,9 @@ stages:
       displayName: publish build directory
 
       # export the nupkg only which will be used in the release pipeline
-    - publish: "$(signOutPath)/CompatPowerShellGet.$(moduleVersion).nupkg"
-      artifact: nupkg
-      displayName: Publish module nupkg
+    #- publish: "$(signOutPath)/CompatPowerShellGet.$(moduleVersion).nupkg"
+    #  artifact: nupkg
+    #  displayName: Publish module nupkg
 
 # Now on to the compliance stage
 - stage: compliance

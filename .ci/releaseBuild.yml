@@ -27,7 +27,7 @@ resources:
     ref: master
 
 # the stages in this build. There are 2
-# the assumption for script analyzer is that test is done as part of
+# the assumption for is that test is done as part of
 # CI so we needn't do it here
 stages:
 - stage: Build
@@ -44,11 +44,6 @@ stages:
     - group: ESRP
     steps:
     - checkout: self
-
-    # because CompatPowerShellGet is a script, we can skip the build step
-    - pwsh: |
-        dir env:
-      displayName: Capture environment
 
     # these are setting vso variables which will be persisted between stages
     - pwsh: |
@@ -82,7 +77,7 @@ stages:
     # checkout the Compliance repository so it can be used to do the actual signing
     - checkout: ComplianceRepo
 
-    # this the MS authored step  This cert covers MS autored items
+    # this the MS authored step  This cert covers MS authored items
     # note that the buildOutputPath (where we get the files to sign)
     # is the same as the signOutputPath in the previous step
     # at the end of this step we will have all the files signed that should be
@@ -93,18 +88,14 @@ stages:
         buildOutputPath: $(signSrcPath)
         # the location to put the signed output
         signOutputPath: $(signOutPath)
-        # the certificate ID to use
+        # the certificate ID to use (Authenticode)
         certificateId: "CP-230012"
-        # use minimatch because we need to exclude the NewtonSoft assembly
-        useMinimatch: true
-        # the file pattern to use - newtonSoft is excluded
         pattern: |
           **\*.psd1
           **\*.psm1
 
     # finally publish the parts of the build which will be used in the next stages
     # if it's not published, the subsequent stages will not be able to access it.
-    # This is the build directory (it contains all of the dll/pdb files)
     - publish: "$(Build.SourcesDirectory)/OSS_Microsoft_CompatPowerShellGet"
       artifact: build
       displayName: publish build directory
@@ -129,11 +120,6 @@ stages:
       parameters:
         # component-governance - the path to sources
         sourceScanPath: '$(Build.SourcesDirectory)/CompatPowerShellGet'
-        # binskim - this isn't recursive, so you need the path to the assemblies
-        # analyzeTarget: '$(Pipeline.Workspace)\build\bin\PSV7Release\netcoreapp3.1\*.dll'
-        # credscan - scan the repo for credentials
-        # you can suppress some files with this.
-        # suppressionsFile: '$(Build.SourcesDirectory)/OSS_Microsoft_PSSA/tools/ReleaseBuild/CredScan.Suppressions.json'
         # TermCheck
         optionsRulesDBPath: ''
         optionsFTPath: ''

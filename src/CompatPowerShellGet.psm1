@@ -1628,7 +1628,7 @@ begin
             $PSBoundParameters['Trusted'] = $true
         }
     }
-    if ( $PSBoundParameters['SourceLocation'] )            { $null = $PSBoundParameters.Remove('SourceLocation'); $PSBoundParameters['Url'] = Convert-ToUri -location $SourceLocation }
+    if ( $PSBoundParameters['SourceLocation'] )            { $null = $PSBoundParameters.Remove('SourceLocation'); $PSBoundParameters['Uri'] = Convert-ToUri -location $SourceLocation }
     if ( $PSBoundParameters['Default'] )                   { $null = $PSBoundParameters.Remove('Default'); $PSBoundParameters['PSGallery'] = $Default }
     
     # Parameter Deletions (unsupported in v3)
@@ -2041,7 +2041,7 @@ begin
             $PSBoundParameters['Trusted'] = $false
         }
     }
-    if ( $PSBoundParameters['SourceLocation'] )            { $null = $PSBoundParameters.Remove('SourceLocation'); $PSBoundParameters['Url'] = Convert-ToUri -location $SourceLocation }
+    if ( $PSBoundParameters['SourceLocation'] )            { $null = $PSBoundParameters.Remove('SourceLocation'); $PSBoundParameters['Uri'] = Convert-ToUri -location $SourceLocation }
     if ( $PSBoundParameters['Default'] )                   { $null = $PSBoundParameters.Remove('Default'); $PSBoundParameters['PSGallery'] = $Default }
     
     # Parameter Deletions (unsupported in v3)

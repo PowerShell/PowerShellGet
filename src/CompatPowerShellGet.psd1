@@ -8,7 +8,7 @@
 
 @{
     RootModule = 'CompatPowerShellGet.psm1'
-    ModuleVersion = '0.0.3'
+    ModuleVersion = '0.0.4'
     GUID = '68ec3ec1-55bf-42f8-9add-d224e5c76548'
     Author = 'Microsoft Corporation'
     CompanyName = 'Microsoft Corporation'
@@ -54,6 +54,10 @@
             LicenseUri = 'https://github.com/PowerShell/CompatPowerShellGet/blob/master/LICENSE'
             ProjectUri = 'https://github.com/PowerShell/CompatPowerShellGet'
             ReleaseNotes = @'
+### 0.0.4
+* Changes
+- Update module to be compatible with latest version of PowerShellGet (3.0.21-beta21)
+
 ### 0.0.3
 * Changes
 - Updated reference to PowerShellGet 'Url' parameter to 'Uri' to reflect changes made in PowerShellGet

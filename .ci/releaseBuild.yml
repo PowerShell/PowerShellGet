@@ -33,7 +33,9 @@ stages:
 - stage: Build
   displayName: Build
   pool:
-    name: Package ES CodeHub Lab E
+    name: 1ES
+    demands:
+    - ImageOverride -equals PSMMS2019-Secure
   jobs:
   - job: Build_Job
     displayName: Build Microsoft.PowerShell.CompatPowerShellGet
@@ -93,6 +95,7 @@ stages:
         pattern: |
           **\*.psd1
           **\*.psm1
+        useMinimatch: true
 
     # finally publish the parts of the build which will be used in the next stages
     # if it's not published, the subsequent stages will not be able to access it.
@@ -107,7 +110,9 @@ stages:
   jobs:
   - job: Compliance_Job
     pool:
-      name: Package ES CodeHub Lab E
+      name: 1ES
+      demands:
+      - ImageOverride -equals PSMMS2019-Secure
     steps:
     - checkout: self
     - checkout: ComplianceRepo

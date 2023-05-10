@@ -163,7 +163,7 @@ stages:
     - task: DownloadPipelineArtifact@2
       displayName: 'Download PowerShellGet module artifacts'
       inputs:
-        artifact: nupkg
+        artifact: CompatPowerShellGet
         patterns: '**/*.nupkg'
         downloadPath: '$(Pipeline.Workspace)/nuget'
 

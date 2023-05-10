@@ -110,7 +110,7 @@ stages:
         Publish-Module -Path $(signOutPath) -Repository local
       displayName: Publish module to local repository
 
-      - pwsh: |
+    - pwsh: |
         $nupkgPath = "$(localRepo)"
         $artifactName = "CompatPowerShellGet"
         Write-Host "##vso[artifact.upload containerfolder=$artifactName;artifactname=$artifactName;]$nupkgPath"
@@ -161,18 +161,18 @@ stages:
     - checkout: self
 
     - task: DownloadPipelineArtifact@2
-    displayName: 'Download PowerShellGet module artifacts'
-    inputs:
-      artifact: nupkg
-      patterns: '**/*.nupkg'
-      downloadPath: '$(Pipeline.Workspace)/nuget'
+      displayName: 'Download PowerShellGet module artifacts'
+      inputs:
+        artifact: nupkg
+        patterns: '**/*.nupkg'
+        downloadPath: '$(Pipeline.Workspace)/nuget'
 
     - pwsh: |
-      $package = (Get-ChildItem '$(Pipeline.Workspace)/nuget/CompatPowerShellGet.*.nupkg').FullName
-      $vstsCommandString = "vso[task.setvariable variable=NugetPkgPath]${package}"
-      Write-Host "sending " + $vstsCommandString
-      Write-Host "##$vstsCommandString"
-    displayName: 'Capture PowerShellGet module NuGet package path and set environment variable'
+        $package = (Get-ChildItem '$(Pipeline.Workspace)/nuget/CompatPowerShellGet.*.nupkg').FullName
+        $vstsCommandString = "vso[task.setvariable variable=NugetPkgPath]${package}"
+        Write-Host "sending " + $vstsCommandString
+        Write-Host "##$vstsCommandString"
+      displayName: 'Capture PowerShellGet module NuGet package path and set environment variable'
 
     - task: NuGetCommand@2
       displayName: 'Push CompatPowerShellGet module artifacts to PSGallery feed'

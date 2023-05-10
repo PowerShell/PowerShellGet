@@ -135,8 +135,6 @@ stages:
     steps:
     - checkout: self
     - checkout: ComplianceRepo
-    - download: current
-      artifact: build
 
     # use the templates in the compliance repo
     # no assemblies, you should use script-module-compliance template

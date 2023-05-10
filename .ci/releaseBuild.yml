@@ -117,7 +117,7 @@ stages:
       displayName: Upload module artifact
 
 # Now on to the compliance stage
-- stage: compliance
+- stage: Compliance
   displayName: Compliance
   dependsOn: Build
   jobs:
@@ -150,6 +150,7 @@ stages:
 stages:
 - stage: Publish
   displayName: Publish
+  dependsOn: Compliance
   pool:
     name: 1ES
     demands:

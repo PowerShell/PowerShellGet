@@ -110,13 +110,11 @@ stages:
         Publish-Module -Path $(signOutPath) -Repository local
       displayName: Publish module to local repository
 
-    - task: NuGetCommand@2
-      displayName: 'Push CompatPowerShellGet module artifacts to PSGallery feed'
-      inputs:
-        command: push
-        packagesToPush: '$(localRepo)'
-        nuGetFeedType: external
-        publishFeedCredentials: PSGalleryPush
+      - pwsh: |
+        $nupkgPath = "$(localRepo)"
+        $artifactName = "CompatPowerShellGet"
+        Write-Host "##vso[artifact.upload containerfolder=$artifactName;artifactname=$artifactName;]$nupkgPath"
+      displayName: Upload module artifact
 
 # Now on to the compliance stage
 - stage: compliance
@@ -148,3 +146,38 @@ stages:
         codeBaseName: 'CompatPowerShellGet_20200201'
         # selections
         APIScan: false # set to false when not using Windows APIs.
+
+stages:
+- stage: Publish
+  displayName: Publish
+  pool:
+    name: 1ES
+    demands:
+    - ImageOverride -equals PSMMS2019-Secure
+  jobs:
+  - job: Publish_Job
+    displayName: Build Microsoft.PowerShell.CompatPowerShellGet
+    steps:
+    - checkout: self
+
+    - task: DownloadPipelineArtifact@2
+    displayName: 'Download PowerShellGet module artifacts'
+    inputs:
+      artifact: nupkg
+      patterns: '**/*.nupkg'
+      downloadPath: '$(Pipeline.Workspace)/nuget'
+
+    - pwsh: |
+      $package = (Get-ChildItem '$(Pipeline.Workspace)/nuget/CompatPowerShellGet.*.nupkg').FullName
+      $vstsCommandString = "vso[task.setvariable variable=NugetPkgPath]${package}"
+      Write-Host "sending " + $vstsCommandString
+      Write-Host "##$vstsCommandString"
+    displayName: 'Capture PowerShellGet module NuGet package path and set environment variable'
+
+    - task: NuGetCommand@2
+      displayName: 'Push CompatPowerShellGet module artifacts to PSGallery feed'
+      inputs:
+        command: push
+        packagesToPush: '$(NugetPkgPath)'
+        nuGetFeedType: external
+        publishFeedCredentials: PSGalleryPush

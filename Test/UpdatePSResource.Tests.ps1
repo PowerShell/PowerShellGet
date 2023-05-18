@@ -347,6 +347,24 @@ Describe 'Test CompatPowerShellGet: Update-PSResource' -tags 'CI' {
         $res.Name | Should -Contain $testModuleName
         $res.Version | Should -Contain "3.0.0.0"
     }
+
+    It "Update resource installed given -Name and -Force parameters" {
+        Install-PSResource -Name $testModuleName -Version "1.0.0.0" -Repository $PSGalleryName -TrustRepository
+
+        Update-Module -Name $testModuleName -RequiredVersion "3.0.0.0" -Foce
+        $res = Get-InstalledPSResource -Name $testModuleName
+
+        $isPkgUpdated = $false
+        foreach ($pkg in $res)
+        {
+            if ([System.Version]$pkg.Version -gt [System.Version]"1.0.0.0")
+            {
+                $isPkgUpdated = $true
+            }
+        }
+
+        $isPkgUpdated | Should -Be $true
+    }
 }
 
 # Ensure that PSGet v2 was not loaded during the test via command discovery

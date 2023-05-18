@@ -25,7 +25,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
         $script:psScriptInfoName = "test_script"
         $scriptDescription = "this is a test script"
         $script:testScriptFilePath = Join-Path -Path $tmpDir1Path -ChildPath "$script:psScriptInfoName.ps1"
-        New-PSScriptFile -Path $script:testScriptFilePath -Description $scriptDescription
+        New-PSScriptFileInfo -Path $script:testScriptFilePath -Description $scriptDescription
     }
 
     AfterEach {
@@ -40,10 +40,10 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
         $scriptFilePath = Join-Path -Path $relativeCurrentPath -ChildPath "$script:psScriptInfoName.ps1"
         $oldDescription = "Old description for test script"
         $newDescription = "New description for test script"
-        New-PSScriptFile -Path $scriptFilePath -Description $oldDescription
+        New-PSScriptFileInfo -Path $scriptFilePath -Description $oldDescription
         
         Update-ScriptFileInfo -Path $scriptFilePath -Description $newDescription
-        Test-PSScriptFile -Path $scriptFilePath | Should -BeTrue
+        Test-PSScriptFileInfo -Path $scriptFilePath | Should -BeTrue
 
         Test-Path -Path $scriptFilePath  | Should -BeTrue
         $results = Get-Content -Path $scriptFilePath -Raw
@@ -63,10 +63,10 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
         $relativeCurrentPath = Get-Location
         $scriptFilePath = Join-Path -Path $relativeCurrentPath -ChildPath "$script:psScriptInfoName.ps1"
 
-        New-PSScriptFile -Path $scriptFilePath -Description $description -Version $version -Author $author -ProjectUri $projectUri
+        New-PSScriptFileInfo -Path $scriptFilePath -Description $description -Version $version -Author $author -ProjectUri $projectUri
         Update-ScriptFileInfo -Path $scriptFilePath -Author $newAuthor
 
-        Test-PSScriptFile -Path $scriptFilePath | Should -BeTrue
+        Test-PSScriptFileInfo -Path $scriptFilePath | Should -BeTrue
         $results = Get-Content -Path $scriptFilePath -Raw
         $results.Contains($newAuthor) | Should -BeTrue
         $results.Contains(".AUTHOR $newAuthor") | Should -BeTrue
@@ -87,7 +87,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
     It "update script file Author property" {    
         $author = "New Author"
         Update-ScriptFileInfo -Path $script:testScriptFilePath -Author $author
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath  | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath  -Raw
@@ -98,7 +98,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
     It "update script file Version property" {
         $version = "2.0.0.0"
         Update-ScriptFileInfo -Path $script:testScriptFilePath -Version $version
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath  | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath  -Raw
@@ -109,7 +109,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
     It "update script file Version property with prerelease version" {
         $version = "3.0.0-alpha"
         Update-ScriptFileInfo -Path $script:testScriptFilePath -Version $version
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath  | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath  -Raw
@@ -126,7 +126,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
     It "update script file Description property" {
         $description = "this is an updated test script"
         Update-ScriptFileInfo -Path $script:testScriptFilePath -Description $description
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath  | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath  -Raw
@@ -137,7 +137,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
     It "update script file Guid property" {
         $guid = [Guid]::NewGuid();
         Update-ScriptFileInfo -Path $script:testScriptFilePath -Guid $guid
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath  | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath  -Raw
@@ -148,7 +148,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
     It "update script file CompanyName property" {
         $companyName = "New Corporation"
         Update-ScriptFileInfo -Path $script:testScriptFilePath -CompanyName $companyName
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath  | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath  -Raw
@@ -159,7 +159,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
     It "update script file Copyright property" {
         $copyright = "(c) 2022 New Corporation. All rights reserved"
         Update-ScriptFileInfo -Path $script:testScriptFilePath -Copyright $copyright
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath  | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath  -Raw
@@ -171,7 +171,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
         $externalModuleDep1 = "ExternalModuleDep1"
         $externalModuleDep2 = "ExternalModuleDep2"
         Update-ScriptFileInfo -Path $script:testScriptFilePath -ExternalModuleDependencies $externalModuleDep1,$externalModuleDep2
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath  | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath  -Raw
@@ -184,7 +184,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
         $externalScriptDep1 = "ExternalScriptDep1"
         $externalScriptDep2 = "ExternalScriptDep2"
         Update-ScriptFileInfo -Path $script:testScriptFilePath -ExternalScriptDependencies $externalScriptDep1,$externalScriptDep2
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath -Raw
@@ -196,7 +196,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
     It "update script file IconUri property" {
         $iconUri = "https://testscript.com/icon"
         Update-ScriptFileInfo -Path $script:testScriptFilePath -IconUri $iconUri
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath  | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath  -Raw
@@ -207,7 +207,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
     It "update script file LicenseUri property" {
         $licenseUri = "https://testscript.com/license"
         Update-ScriptFileInfo -Path $script:testScriptFilePath -LicenseUri $licenseUri
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath  | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath  -Raw
@@ -218,7 +218,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
     It "update script file ProjectUri property" {
         $projectUri = "https://testscript.com/"
         Update-ScriptFileInfo -Path $script:testScriptFilePath -ProjectUri $projectUri
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath  | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath  -Raw
@@ -229,7 +229,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
     It "update script file PrivateData property" {
         $privateData = "this is some private data"
         Update-ScriptFileInfo -Path $script:testScriptFilePath -PrivateData $privateData
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath  | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath  -Raw
@@ -240,7 +240,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
     It "update script file ReleaseNotes property" {
         $releaseNotes = "Release notes for script."
         Update-ScriptFileInfo -Path $script:testScriptFilePath -ReleaseNotes $releaseNotes
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath -Raw
@@ -256,7 +256,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
         $requiredModules = @($hashtable1, $hashtable2, $hashtable3, $hashtable4)
 
         Update-ScriptFileInfo -Path $script:testScriptFilePath -RequiredModules $requiredModules
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath -Raw
@@ -269,7 +269,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
         $requiredScript1 = "RequiredScript1"
         $requiredScript2 = "RequiredScript2"
         Update-ScriptFileInfo -Path $script:testScriptFilePath -RequiredScripts $requiredScript1, $requiredScript2
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath -Raw
@@ -282,7 +282,7 @@ Describe "Test CompatPowerShellGet: Update-PSScriptFileInfo" -tags 'CI' {
         $tag1 = "tag1"
         $tag2 = "tag2"
         Update-ScriptFileInfo -Path $script:testScriptFilePath -Tags $tag1, $tag2
-        Test-PSScriptFile $script:testScriptFilePath | Should -Be $true
+        Test-PSScriptFileInfo $script:testScriptFilePath | Should -Be $true
 
         Test-Path -Path $script:testScriptFilePath | Should -BeTrue
         $results = Get-Content -Path $script:testScriptFilePath -Raw

@@ -1290,7 +1290,7 @@ param(
             if ( $PSBoundParameters['PassThru'] )      { $null = $PSBoundParameters.Remove('PassThru') }
             # END PARAMETER MAP
 
-            $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('New-PSScriptFile', [System.Management.Automation.CommandTypes]::Cmdlet)
+            $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('New-PSScriptFileInfo', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
@@ -2062,7 +2062,7 @@ param(
             if ( $PSBoundParameters['LiteralPath'] )      { $null = $PSBoundParameters.Remove('LiteralPath'); $PSBoundParameters['Path'] = $LiteralPath }
             # END PARAMETER MAP
 
-            $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Test-PSScriptFile', [System.Management.Automation.CommandTypes]::Cmdlet)
+            $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Test-PSScriptFileInfo', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()

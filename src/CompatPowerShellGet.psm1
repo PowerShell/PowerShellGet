@@ -2409,7 +2409,6 @@ param(
             # Parameter Deletions (unsupported in v3)
             if ( $PSBoundParameters['Proxy'] )              { $null = $PSBoundParameters.Remove('Proxy') }
             if ( $PSBoundParameters['ProxyCredential'] )    { $null = $PSBoundParameters.Remove('ProxyCredential') }
-            if ( $PSBoundParameters['Force'] )              { $null = $PSBoundParameters.Remove('Force') }
             # END PARAMETER MAP
 
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Update-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
@@ -2513,7 +2512,6 @@ param(
             # Parameter Deletions (unsupported in v3)
             if ( $PSBoundParameters['Proxy'] )              { $null = $PSBoundParameters.Remove('Proxy') }
             if ( $PSBoundParameters['ProxyCredential'] )    { $null = $PSBoundParameters.Remove('ProxyCredential') }
-            if ( $PSBoundParameters['Force'] )              { $null = $PSBoundParameters.Remove('Force') }
             # END PARAMETER MAP
 
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Update-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)

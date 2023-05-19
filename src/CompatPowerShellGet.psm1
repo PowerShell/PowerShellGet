@@ -2549,6 +2549,135 @@ param(
     #>
 }
 
+function Update-ModuleManifest {
+[CmdletBinding(PositionalBinding = $false, DefaultParameterSetName = 'PathParameterSet', SupportsShouldProcess = $true, HelpUri = 'https://go.microsoft.com/fwlink/?LinkId=619793')]
+param(
+    [Parameter(ParameterSetName = 'PathParameterSet', Position=0, Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+    [ValidateNotNullOrEmpty()]
+    [string]
+    ${Path},
+
+    [Parameter(ParameterSetName = 'LiteralPathParameterSet', Position=0, Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+    [Alias('PSPath')]
+    [ValidateNotNullOrEmpty()]
+    [string]
+    ${LiteralPath},
+
+    [ValidateNotNullOrEmpty()]
+    [string]
+    ${Version},
+    
+    [ValidateNotNullOrEmpty()]
+    [string]
+    ${Author},
+    
+    [ValidateNotNullOrEmpty()]
+    [string]
+    ${Description},
+
+    [ValidateNotNullOrEmpty()]
+    [Guid]
+    ${Guid},
+
+    [ValidateNotNullOrEmpty()]
+    [string]
+    ${CompanyName},
+
+    [ValidateNotNullOrEmpty()]
+    [string]
+    ${Copyright},
+    
+    [ValidateNotNullOrEmpty()]
+    [Object[]]
+    ${RequiredModules},
+
+    [ValidateNotNullOrEmpty()]
+    [string[]]
+    ${ExternalModuleDependencies},
+
+    [ValidateNotNullOrEmpty()]
+    [string[]]
+    ${RequiredScripts},
+    
+    [ValidateNotNullOrEmpty()]
+    [string[]]
+    ${ExternalScriptDependencies},
+
+    [ValidateNotNullOrEmpty()]
+    [string[]]
+    ${Tags},
+    
+    [ValidateNotNullOrEmpty()]
+    [Uri]
+    ${ProjectUri},
+ 
+    [ValidateNotNullOrEmpty()]
+    [Uri]
+    ${LicenseUri},
+
+    [ValidateNotNullOrEmpty()]
+    [Uri]
+    ${IconUri},
+    
+    [string[]]
+    ${ReleaseNotes},
+
+    [ValidateNotNullOrEmpty()]
+    [string]
+    ${PrivateData},
+
+    [switch]
+    ${PassThru},
+
+    [switch]
+    ${Force})
+
+    begin
+    {
+        try {
+            $outBuffer = $null
+            if ($PSBoundParameters.TryGetValue('OutBuffer', [ref]$outBuffer))
+            {
+                $PSBoundParameters['OutBuffer'] = 1
+            }
+
+            # PARAMETER MAP
+            # No parameter translations
+            # END PARAMETER MAP
+
+            $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Update-PSModuleManifest', [System.Management.Automation.CommandTypes]::Cmdlet)
+            $scriptCmd = {& $wrappedCmd @PSBoundParameters }
+
+            $steppablePipeline = $scriptCmd.GetSteppablePipeline()
+            $steppablePipeline.Begin($PSCmdlet)
+        } catch {
+            throw
+        }
+    }
+
+    process
+    {
+        try {
+            $steppablePipeline.Process($_)
+        } catch {
+            throw
+        }
+    }
+
+    end
+    {
+        try {
+            $steppablePipeline.End()
+        } catch {
+            throw
+        }
+    }
+    <#
+    .ForwardHelpTargetName Update-ModuleManifest
+    .ForwardHelpCategory Function
+    #>
+}
+
 function Update-ScriptFileInfo {
 [CmdletBinding(PositionalBinding = $false, DefaultParameterSetName = 'PathParameterSet', SupportsShouldProcess = $true, HelpUri = 'https://go.microsoft.com/fwlink/?LinkId=619793')]
 param(

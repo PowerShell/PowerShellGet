@@ -5,7 +5,7 @@ $modPath = "$psscriptroot/../PSGetTestUtils.psm1"
 Import-Module $modPath -Force -Verbose
 Write-Verbose -Verbose -Message "PowerShellGet version currently loaded: $($(Get-Module powershellget).Version)"
 
-Describe "Test CompatPowerShellGet: New-PSScriptFile" -tags 'CI' {
+Describe "Test CompatPowerShellGet: New-PSScriptFileInfo" -tags 'CI' {
     BeforeAll {
         $tmpDir1Path = Join-Path -Path $TestDrive -ChildPath "tmpDir1"
         $tmpDirPaths = @($tmpDir1Path)
@@ -25,7 +25,7 @@ Describe "Test CompatPowerShellGet: New-PSScriptFile" -tags 'CI' {
     It "Create .ps1 file with minimal required fields" {    
         $description = "Test description"
         New-ScriptFileInfo -Path  $script:testScriptFilePath -Description $description
-        Test-PSScriptFile -Path $script:testScriptFilePath | Should -BeTrue
+        Test-PSScriptFileInfo -Path $script:testScriptFilePath | Should -BeTrue
     }
 
     It "Create .ps1 file with relative path" {
@@ -35,7 +35,7 @@ Describe "Test CompatPowerShellGet: New-PSScriptFile" -tags 'CI' {
         $description = "Test description"
         New-ScriptFileInfo -Path $scriptFilePath -Description $description
 
-        Test-PSScriptFile -Path $scriptFilePath | Should -BeTrue
+        Test-PSScriptFileInfo -Path $scriptFilePath | Should -BeTrue
         Remove-Item -Path $scriptFilePath
     }
 

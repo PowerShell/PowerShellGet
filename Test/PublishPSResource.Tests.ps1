@@ -251,7 +251,7 @@ Describe "Test CompatPowerShellGet: Publish-PSResource" -tags 'CI' {
             }
         
         $scriptPath = (Join-Path -Path $script:tmpScriptsFolderPath -ChildPath "$scriptName.ps1")
-        New-PSScriptFile @params -Path $scriptPath
+        New-PSScriptFileInfo @params -Path $scriptPath
 
         Publish-Script -Path $scriptPath
 

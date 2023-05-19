@@ -190,6 +190,12 @@ Describe 'Test CompatPowerShellGet: Find-PSResource' -tags 'CI' {
         $resModuleType = Out-String -InputObject $resModule.Type
         $resModuleType.Replace(",", " ").Split() | Should -Contain "Module"
     }
+
+    It "Find-RoleCapability should emit warning" {
+        $results = Find-RoleCapability -Name $testModuleName -Repository $PSGalleryName -WarningVariable wv
+        $results | Should -BeNullOrEmpty
+        $wv[0] | Should -Be "The cmdlet 'Find-RoleCapability' is deprecated."
+    }
 }
 
 # Ensure that PSGet v2 was not loaded during the test via command discovery

@@ -573,6 +573,7 @@ param(
     begin
     {
         # Find-RoleCability is no longer supported
+        Write-Warning -Message "The cmdlet 'Find-RoleCapability' is deprecated."
     }
     <#
     .ForwardHelpTargetName Find-RoleCapability

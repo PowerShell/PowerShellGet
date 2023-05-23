@@ -122,7 +122,7 @@ function Convert-VersionParamaters
     elseif ( ! $RequiredVersion -and ! $MinimumVersion -and ! $MaximumVersion ) {
         return $null
     }
-    elseif ( $RequiredVersion -and ! $MinimumVersion -and ! $MaximumVersion ) { 
+    elseif ( $RequiredVersion -and ! $MinimumVersion -and ! $MaximumVersion ) {
         return "$RequiredVersion" }
 
     # now return the appropriate string
@@ -462,7 +462,7 @@ param(
             }
 
             # PARAMETER MAP
-            # add new specifier 
+            # add new specifier
             $PSBoundParameters['Type'] = 'module'
             # Parameter translations
             $verArgs = @{}
@@ -659,7 +659,7 @@ param(
             }
 
             # PARAMETER MAP
-            # add new specifier 
+            # add new specifier
             $PSBoundParameters['Type'] = 'script'
             # Parameter translations
             $verArgs = @{}
@@ -1201,11 +1201,11 @@ param(
     [ValidateNotNullOrEmpty()]
     [string]
     ${Version},
-    
+
     [ValidateNotNullOrEmpty()]
     [string]
     ${Author},
-    
+
     [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
     [string]
@@ -1222,11 +1222,11 @@ param(
     [ValidateNotNullOrEmpty()]
     [string]
     ${Copyright},
-    
+
     [ValidateNotNullOrEmpty()]
     [Object[]]
     ${RequiredModules},
-    
+
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${ExternalModuleDependencies},
@@ -1234,7 +1234,7 @@ param(
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${RequiredScripts},
-    
+
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${ExternalScriptDependencies},
@@ -1242,19 +1242,19 @@ param(
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${Tags},
-    
+
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${ProjectUri},
- 
+
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${LicenseUri},
- 
+
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${IconUri},
-    
+
     [string[]]
     ${ReleaseNotes},
 
@@ -1753,7 +1753,7 @@ param(
             if ( $PSBoundParameters['Force'] )            { $null = $PSBoundParameters.Remove('Force') }
             if ( $PSBoundParameters['AcceptLicense'] )    { $null = $PSBoundParameters.Remove('AcceptLicense') }
             # END PARAMETER MAP
-            
+
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Save-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
@@ -2565,11 +2565,11 @@ param(
     [ValidateNotNullOrEmpty()]
     [string]
     ${Version},
-    
+
     [ValidateNotNullOrEmpty()]
     [string]
     ${Author},
-    
+
     [ValidateNotNullOrEmpty()]
     [string]
     ${Description},
@@ -2585,7 +2585,7 @@ param(
     [ValidateNotNullOrEmpty()]
     [string]
     ${Copyright},
-    
+
     [ValidateNotNullOrEmpty()]
     [Object[]]
     ${RequiredModules},
@@ -2597,7 +2597,7 @@ param(
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${RequiredScripts},
-    
+
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${ExternalScriptDependencies},
@@ -2605,11 +2605,11 @@ param(
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${Tags},
-    
+
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${ProjectUri},
- 
+
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${LicenseUri},
@@ -2617,7 +2617,7 @@ param(
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${IconUri},
-    
+
     [string[]]
     ${ReleaseNotes},
 
@@ -2694,11 +2694,11 @@ param(
     [ValidateNotNullOrEmpty()]
     [string]
     ${Version},
-    
+
     [ValidateNotNullOrEmpty()]
     [string]
     ${Author},
-    
+
     [ValidateNotNullOrEmpty()]
     [string]
     ${Description},
@@ -2714,7 +2714,7 @@ param(
     [ValidateNotNullOrEmpty()]
     [string]
     ${Copyright},
-    
+
     [ValidateNotNullOrEmpty()]
     [Object[]]
     ${RequiredModules},
@@ -2726,7 +2726,7 @@ param(
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${RequiredScripts},
-    
+
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${ExternalScriptDependencies},
@@ -2734,11 +2734,11 @@ param(
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${Tags},
-    
+
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${ProjectUri},
- 
+
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${LicenseUri},
@@ -2746,7 +2746,7 @@ param(
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${IconUri},
-    
+
     [string[]]
     ${ReleaseNotes},
 
@@ -2816,6 +2816,11 @@ param(
     #>
 }
 
+New-Alias -Name fimo -Value Find-Module
+New-Alias -Name inmo -Value Install-Module
+New-Alias -Name pumo -Value Publish-Module
+New-Alias -Name upmo -Value Update-Module
+
 $functionsToExport = @(
     "Find-Command",
     "Find-DscResource",
@@ -2843,4 +2848,11 @@ $functionsToExport = @(
     "Update-ScriptFileInfo"
 )
 
-export-ModuleMember -Function $functionsToExport
+$aliasesToExport = @('
+    fimo',
+    'inmo',
+    'pumo',
+    'upmo'
+)
+
+export-ModuleMember -Function $functionsToExport -Alias $aliasesToExport

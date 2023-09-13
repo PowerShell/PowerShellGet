@@ -122,7 +122,7 @@ function Convert-VersionParamaters
     elseif ( ! $RequiredVersion -and ! $MinimumVersion -and ! $MaximumVersion ) {
         return $null
     }
-    elseif ( $RequiredVersion -and ! $MinimumVersion -and ! $MaximumVersion ) { 
+    elseif ( $RequiredVersion -and ! $MinimumVersion -and ! $MaximumVersion ) {
         return "$RequiredVersion" }
 
     # now return the appropriate string
@@ -462,7 +462,7 @@ param(
             }
 
             # PARAMETER MAP
-            # add new specifier 
+            # add new specifier
             $PSBoundParameters['Type'] = 'module'
             # Parameter translations
             $verArgs = @{}
@@ -659,7 +659,7 @@ param(
             }
 
             # PARAMETER MAP
-            # add new specifier 
+            # add new specifier
             $PSBoundParameters['Type'] = 'script'
             # Parameter translations
             $verArgs = @{}
@@ -1021,11 +1021,13 @@ param(
                 $PSBoundParameters['Version'] = $ver
             }
             if ( $PSBoundParameters['AllowPrerelease'] )    { $null = $PSBoundParameters.Remove('AllowPrerelease'); $PSBoundParameters['Prerelease'] = $AllowPrerelease }
-            if ( $PSBoundParameters['SkipPublisherCheck'] ) { $null = $PSBoundParameters.Remove('SkipPublisherCheck'); $PSBoundParameters['AuthenticodeCheck'] = $SkipPublisherCheck }
+            $PSBoundParameters['NoClobber'] = $true
+            if ( $PSBoundParameters['AllowClobber'] )    { $null = $PSBoundParameters.Remove('AllowClobber'); $PSBoundParameters['NoClobber'] = (-not $AllowClobber) }
+            $PSBoundParameters['AuthenticodeCheck'] = $true
+            if ( $PSBoundParameters['SkipPublisherCheck'] ) { $null = $PSBoundParameters.Remove('SkipPublisherCheck'); $PSBoundParameters['AuthenticodeCheck'] = (-not $SkipPublisherCheck) }
             # Parameter Deletions (unsupported in v3)
             if ( $PSBoundParameters['Proxy'] )              { $null = $PSBoundParameters.Remove('Proxy') }
             if ( $PSBoundParameters['ProxyCredential'] )    { $null = $PSBoundParameters.Remove('ProxyCredential') }
-            if ( $PSBoundParameters['AllowClobber'] )       { $null = $PSBoundParameters.Remove('AllowClobber') }
             if ( $PSBoundParameters['Force'] )              { $null = $PSBoundParameters.Remove('Force') }
             # END PARAMETER MAP
 
@@ -1142,14 +1144,14 @@ param(
             # PARAMETER MAP
             # Parameter translations
             $verArgs = @{}
-            if ( $PSBoundParameters['MinimumVersion'] )     { $null = $PSBoundParameters.Remove('MinimumVersion'); $verArgs['MinimumVersion'] = $MinimumVersion }
-            if ( $PSBoundParameters['MaximumVersion'] )     { $null = $PSBoundParameters.Remove('MaximumVersion'); $verArgs['MaximumVersion'] = $MaximumVersion }
-            if ( $PSBoundParameters['RequiredVersion'] )    { $null = $PSBoundParameters.Remove('RequiredVersion'); $verArgs['RequiredVersion'] = $RequiredVersion }
+            if ( $PSBoundParameters['MinimumVersion'] )   { $null = $PSBoundParameters.Remove('MinimumVersion'); $verArgs['MinimumVersion'] = $MinimumVersion }
+            if ( $PSBoundParameters['MaximumVersion'] )   { $null = $PSBoundParameters.Remove('MaximumVersion'); $verArgs['MaximumVersion'] = $MaximumVersion }
+            if ( $PSBoundParameters['RequiredVersion'] )  { $null = $PSBoundParameters.Remove('RequiredVersion'); $verArgs['RequiredVersion'] = $RequiredVersion }
             $ver = Convert-VersionParamaters @verArgs
             if ( $ver ) {
                 $PSBoundParameters['Version'] = $ver
             }
-            if ( $PSBoundParameters['AllowPrerelease'] )    { $null = $PSBoundParameters.Remove('AllowPrerelease'); $PSBoundParameters['Prerelease'] = $AllowPrerelease }
+            if ( $PSBoundParameters['AllowPrerelease'] )  { $null = $PSBoundParameters.Remove('AllowPrerelease'); $PSBoundParameters['Prerelease'] = $AllowPrerelease }
             # Parameter Deletions (unsupported in v3)
             if ( $PSBoundParameters['NoPathUpdate'] )     { $null = $PSBoundParameters.Remove('NoPathUpdate') }
             if ( $PSBoundParameters['Proxy'] )            { $null = $PSBoundParameters.Remove('Proxy') }
@@ -1201,11 +1203,11 @@ param(
     [ValidateNotNullOrEmpty()]
     [string]
     ${Version},
-    
+
     [ValidateNotNullOrEmpty()]
     [string]
     ${Author},
-    
+
     [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
     [string]
@@ -1222,11 +1224,11 @@ param(
     [ValidateNotNullOrEmpty()]
     [string]
     ${Copyright},
-    
+
     [ValidateNotNullOrEmpty()]
     [Object[]]
     ${RequiredModules},
-    
+
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${ExternalModuleDependencies},
@@ -1234,7 +1236,7 @@ param(
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${RequiredScripts},
-    
+
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${ExternalScriptDependencies},
@@ -1242,19 +1244,19 @@ param(
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${Tags},
-    
+
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${ProjectUri},
- 
+
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${LicenseUri},
- 
+
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${IconUri},
-    
+
     [string[]]
     ${ReleaseNotes},
 
@@ -1753,7 +1755,7 @@ param(
             if ( $PSBoundParameters['Force'] )            { $null = $PSBoundParameters.Remove('Force') }
             if ( $PSBoundParameters['AcceptLicense'] )    { $null = $PSBoundParameters.Remove('AcceptLicense') }
             # END PARAMETER MAP
-            
+
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Save-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
@@ -2565,11 +2567,11 @@ param(
     [ValidateNotNullOrEmpty()]
     [string]
     ${Version},
-    
+
     [ValidateNotNullOrEmpty()]
     [string]
     ${Author},
-    
+
     [ValidateNotNullOrEmpty()]
     [string]
     ${Description},
@@ -2585,7 +2587,7 @@ param(
     [ValidateNotNullOrEmpty()]
     [string]
     ${Copyright},
-    
+
     [ValidateNotNullOrEmpty()]
     [Object[]]
     ${RequiredModules},
@@ -2597,7 +2599,7 @@ param(
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${RequiredScripts},
-    
+
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${ExternalScriptDependencies},
@@ -2605,11 +2607,11 @@ param(
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${Tags},
-    
+
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${ProjectUri},
- 
+
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${LicenseUri},
@@ -2617,7 +2619,7 @@ param(
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${IconUri},
-    
+
     [string[]]
     ${ReleaseNotes},
 
@@ -2694,11 +2696,11 @@ param(
     [ValidateNotNullOrEmpty()]
     [string]
     ${Version},
-    
+
     [ValidateNotNullOrEmpty()]
     [string]
     ${Author},
-    
+
     [ValidateNotNullOrEmpty()]
     [string]
     ${Description},
@@ -2714,7 +2716,7 @@ param(
     [ValidateNotNullOrEmpty()]
     [string]
     ${Copyright},
-    
+
     [ValidateNotNullOrEmpty()]
     [Object[]]
     ${RequiredModules},
@@ -2726,7 +2728,7 @@ param(
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${RequiredScripts},
-    
+
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${ExternalScriptDependencies},
@@ -2734,11 +2736,11 @@ param(
     [ValidateNotNullOrEmpty()]
     [string[]]
     ${Tags},
-    
+
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${ProjectUri},
- 
+
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${LicenseUri},
@@ -2746,7 +2748,7 @@ param(
     [ValidateNotNullOrEmpty()]
     [Uri]
     ${IconUri},
-    
+
     [string[]]
     ${ReleaseNotes},
 

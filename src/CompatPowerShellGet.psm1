@@ -2818,6 +2818,11 @@ param(
     #>
 }
 
+New-Alias -Name fimo -Value Find-Module
+New-Alias -Name inmo -Value Install-Module
+New-Alias -Name pumo -Value Publish-Module
+New-Alias -Name upmo -Value Update-Module
+
 $functionsToExport = @(
     "Find-Command",
     "Find-DscResource",
@@ -2845,4 +2850,11 @@ $functionsToExport = @(
     "Update-ScriptFileInfo"
 )
 
-export-ModuleMember -Function $functionsToExport
+$aliasesToExport = @('
+    fimo',
+    'inmo',
+    'pumo',
+    'upmo'
+)
+
+export-ModuleMember -Function $functionsToExport -Alias $aliasesToExport

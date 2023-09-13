@@ -1,5 +1,5 @@
 # The name of the build that will be seen in mscodehub
-name: CompatPowerShellget-Release-$(Build.BuildId)
+name: PowerShellget-Release-$(Build.BuildId)
 # how is the build triggered
 # since this is a release build, no trigger as it's a manual release
 trigger: none
@@ -38,7 +38,7 @@ stages:
     - ImageOverride -equals PSMMS2019-Secure
   jobs:
   - job: Build_Job
-    displayName: Build Microsoft.PowerShell.CompatPowerShellGet
+    displayName: Build Microsoft.PowerShell.PowerShellGet
     # note the variable reference to ESRP.
     # this must be created in Project -> Pipelines -> Library -> VariableGroups
     # where it describes the link to the SigningServer
@@ -49,14 +49,14 @@ stages:
 
     # these are setting vso variables which will be persisted between stages
     - pwsh: |
-        $signSrcPath = "$(Build.SourcesDirectory)/CompatPowerShellGet/src"
+        $signSrcPath = "$(Build.SourcesDirectory)/PowerShellGet/src"
         dir
         # Set signing src path variable
         $vstsCommandString = "vso[task.setvariable variable=signSrcPath]${signSrcPath}"
         Write-Host "sending " + $vstsCommandString
         Write-Host "##$vstsCommandString"
 
-        $signOutPath = "$(Build.SourcesDirectory)/OSS_Microsoft_CompatPowerShellGet/signed/CompatPowerShellGet"
+        $signOutPath = "$(Build.SourcesDirectory)/OSS_Microsoft_CompatPowerShellGet/signed/PowerShellGet"
         $null = New-Item -ItemType Directory -Path $signOutPath
         # Set signing out path variable
         $vstsCommandString = "vso[task.setvariable variable=signOutPath]${signOutPath}"
@@ -69,7 +69,7 @@ stages:
         Write-Host "##$vstsCommandString"
 
         # Get version and create a variable
-        $moduleData = Import-PowerShellDataFile "$(Build.SourcesDirectory)/CompatPowerShellGet/src/CompatPowerShellGet.psd1"
+        $moduleData = Import-PowerShellDataFile "$(Build.SourcesDirectory)/PowerShellGet/src/PowerShellGet.psd1"
         $moduleVersion = $moduleData.ModuleVersion
         $vstsCommandString = "vso[task.setvariable variable=moduleVersion]${moduleVersion}"
         Write-Host "sending " + $vstsCommandString
@@ -112,7 +112,7 @@ stages:
 
     - pwsh: |
         $nupkgPath = "$(localRepo)"
-        $artifactName = "CompatPowerShellGet"
+        $artifactName = "PowerShellGet"
         Write-Host "##vso[artifact.upload containerfolder=$artifactName;artifactname=$artifactName;]$nupkgPath"
       displayName: Upload module artifact
 
@@ -137,7 +137,7 @@ stages:
     - template: script-module-compliance.yml@ComplianceRepo
       parameters:
         # component-governance - the path to sources
-        sourceScanPath: '$(Build.SourcesDirectory)/CompatPowerShellGet'
+        sourceScanPath: '$(Build.SourcesDirectory)/PowerShellGet'
         # TermCheck
         optionsRulesDBPath: ''
         optionsFTPath: ''
@@ -157,26 +157,26 @@ stages:
     - ImageOverride -equals PSMMS2019-Secure
   jobs:
   - job: Publish_Job
-    displayName: Build Microsoft.PowerShell.CompatPowerShellGet
+    displayName: Build Microsoft.PowerShell.PowerShellGet
     steps:
     - checkout: self
 
     - task: DownloadPipelineArtifact@2
       displayName: 'Download PowerShellGet module artifacts'
       inputs:
-        artifact: CompatPowerShellGet
+        artifact: PowerShellGet
         patterns: '**/*.nupkg'
         downloadPath: '$(Pipeline.Workspace)/nuget'
 
     - pwsh: |
-        $package = (Get-ChildItem '$(Pipeline.Workspace)/nuget/CompatPowerShellGet.*.nupkg').FullName
+        $package = (Get-ChildItem '$(Pipeline.Workspace)/nuget/PowerShellGet.*.nupkg').FullName
         $vstsCommandString = "vso[task.setvariable variable=NugetPkgPath]${package}"
         Write-Host "sending " + $vstsCommandString
         Write-Host "##$vstsCommandString"
       displayName: 'Capture PowerShellGet module NuGet package path and set environment variable'
 
     - task: NuGetCommand@2
-      displayName: 'Push CompatPowerShellGet module artifacts to PSGallery feed'
+      displayName: 'Push PowerShellGet module artifacts to PSGallery feed'
       inputs:
         command: push
         packagesToPush: '$(NugetPkgPath)'

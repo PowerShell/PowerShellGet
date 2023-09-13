@@ -1,4 +1,10 @@
 # Changelog
+### 0.9.0
+
+### 0.0.4
+* Changes
+- Update module to be compatible with latest version of PowerShellGet (3.0.21-beta21)
+
 ### 0.0.3
 * Changes
 - Updated reference to PowerShellGet 'Url' parameter to 'Uri' to reflect changes made in PowerShellGet

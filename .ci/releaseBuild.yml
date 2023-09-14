@@ -1,5 +1,6 @@
 # The name of the build that will be seen in mscodehub
-name: PowerShellget-Release-$(Build.BuildId)
+name: PowerShellGet-Release-$(Build.BuildId)
+
 # how is the build triggered
 # since this is a release build, no trigger as it's a manual release
 trigger: none

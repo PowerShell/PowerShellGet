@@ -115,7 +115,6 @@ stages:
     - publish: "$(signOutPath)"
      artifact: build
      displayName: publish build directory
-
       
     - pwsh: |
         $nupkgPath = "$(localRepo)"

@@ -114,7 +114,7 @@ stages:
     # if it's not published, the subsequent stages will not be able to access it.
     - publish: "$(signOutPath)"
      artifact: build
-       displayName: publish build directory
+     displayName: publish build directory
 
       
     - pwsh: |

@@ -44,6 +44,7 @@
 
     PrivateData = @{
         PSData = @{
+            Prerelease = 'preview'
             Tags = @('PackageManagement',
             'PSEdition_Desktop',
             'PSEdition_Core',
@@ -54,7 +55,7 @@
             LicenseUri = 'https://github.com/PowerShell/PowerShellGet/blob/master/LICENSE'
             ProjectUri = 'https://github.com/PowerShell/PowerShellGet'
             ReleaseNotes = @'
-### 2.9.0
+### 2.9.0-preview
 * Changes
 - This module was renamed from 'CompatPowerShellGet' to 'PowerShellGet'
 

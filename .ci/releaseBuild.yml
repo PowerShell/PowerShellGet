@@ -114,8 +114,8 @@ stages:
     # finally publish the parts of the build which will be used in the next stages
     # if it's not published, the subsequent stages will not be able to access it.
     - publish: "$(signOutPath)"
-     artifact: build
-     displayName: publish build directory
+      artifact: build
+      displayName: publish build directory
       
     - pwsh: |
         $nupkgPath = "$(localRepo)"

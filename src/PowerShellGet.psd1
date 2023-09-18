@@ -8,7 +8,7 @@
 
 @{
     RootModule = 'PowerShellGet.psm1'
-    ModuleVersion = '0.9.0'
+    ModuleVersion = '2.9.0'
     GUID = '68ec3ec1-55bf-42f8-9add-d224e5c76548'
     Author = 'Microsoft Corporation'
     CompanyName = 'Microsoft Corporation'
@@ -44,6 +44,7 @@
 
     PrivateData = @{
         PSData = @{
+            Prerelease = 'preview'
             Tags = @('PackageManagement',
             'PSEdition_Desktop',
             'PSEdition_Core',
@@ -54,22 +55,9 @@
             LicenseUri = 'https://github.com/PowerShell/PowerShellGet/blob/master/LICENSE'
             ProjectUri = 'https://github.com/PowerShell/PowerShellGet'
             ReleaseNotes = @'
-### 0.9.0
-
-### 0.0.4
+### 2.9.0-preview
 * Changes
-- Update module to be compatible with latest version of PowerShellGet (3.0.21-beta21)
-
-### 0.0.3
-* Changes
-- Updated reference to PowerShellGet 'Url' parameter to 'Uri' to reflect changes made in PowerShellGet
-
-### 0.0.2
-* Bug Fix
-- Remove -Force parameter when calling into v3 cmdlets
-
-### 0.0.1
-* Initial release
+- This module was renamed from 'CompatPowerShellGet' to 'PowerShellGet'
 
 ## For full history of release notes see changelog:
 https://github.com/PowerShell/PowerShellGet/blob/master/CHANGELOG.md

@@ -8,7 +8,7 @@
 
 @{
     RootModule = 'PowerShellGet.psm1'
-    ModuleVersion = '2.9.0'
+    ModuleVersion = '3.0.22'
     GUID = '68ec3ec1-55bf-42f8-9add-d224e5c76548'
     Author = 'Microsoft Corporation'
     CompanyName = 'Microsoft Corporation'
@@ -44,7 +44,7 @@
 
     PrivateData = @{
         PSData = @{
-            Prerelease = 'preview'
+            Prerelease = 'beta22'
             Tags = @('PackageManagement',
             'PSEdition_Desktop',
             'PSEdition_Core',
@@ -55,7 +55,7 @@
             LicenseUri = 'https://github.com/PowerShell/PowerShellGet/blob/master/LICENSE'
             ProjectUri = 'https://github.com/PowerShell/PowerShellGet'
             ReleaseNotes = @'
-### 2.9.0-preview
+### 3.0.22-beta22
 * Changes
 - This module was renamed from 'CompatPowerShellGet' to 'PowerShellGet'
 

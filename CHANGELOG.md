@@ -1,5 +1,7 @@
 # Changelog
-### 2.9.0-preview
+### 3.0.22-beta22
+* Changes
+- This module was renamed from 'CompatPowerShellGet' to 'PowerShellGet'
 
 ### 0.0.4
 * Changes

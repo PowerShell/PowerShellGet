@@ -236,6 +236,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Find-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -255,6 +262,15 @@ param(
     end
     {
         try {
+
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -346,6 +362,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Find-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -365,8 +388,16 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
             $steppablePipeline.End()
-        } catch {
+        }
+        catch {
             throw
         }
     }
@@ -488,6 +519,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Find-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -507,6 +545,13 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
             $steppablePipeline.End()
         } catch {
             throw
@@ -684,6 +729,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Find-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -703,6 +755,13 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
             $steppablePipeline.End()
         } catch {
             throw
@@ -769,6 +828,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Get-InstalledPSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -788,6 +854,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -850,6 +924,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Get-InstalledPSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -869,6 +950,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -900,6 +989,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Get-PSResourceRepository', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -919,6 +1015,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -1034,6 +1138,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Install-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -1053,6 +1164,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -1162,6 +1281,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Install-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -1172,6 +1298,14 @@ param(
     process
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.Process($_)
         } catch {
             throw
@@ -1296,6 +1430,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('New-PSScriptFileInfo', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -1315,6 +1456,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -1424,6 +1573,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Publish-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -1443,6 +1599,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -1504,6 +1668,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Publish-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -1523,6 +1694,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -1622,6 +1801,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Register-PSResourceRepository', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -1641,6 +1827,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -1759,6 +1953,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Save-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -1778,6 +1979,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -1895,6 +2104,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Save-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -1914,6 +2130,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -2007,6 +2231,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Set-PSResourceRepository', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -2026,6 +2257,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -2068,6 +2307,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Test-PSScriptFileInfo', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -2087,6 +2333,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -2165,6 +2419,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Uninstall-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -2184,6 +2445,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -2257,6 +2526,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Uninstall-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -2276,6 +2552,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -2311,6 +2595,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Unregister-PSResourceRepository', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -2330,6 +2621,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -2417,6 +2716,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Update-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -2436,6 +2742,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -2520,6 +2834,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Update-PSResource', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -2539,6 +2860,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -2649,6 +2978,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Update-PSModuleManifest', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -2668,6 +3004,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw
@@ -2788,6 +3132,13 @@ param(
             $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('Update-PSScriptFileInfo', [System.Management.Automation.CommandTypes]::Cmdlet)
             $scriptCmd = {& $wrappedCmd @PSBoundParameters }
 
+            # Set internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $true)
+            } catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline = $scriptCmd.GetSteppablePipeline()
             $steppablePipeline.Begin($PSCmdlet)
         } catch {
@@ -2807,6 +3158,14 @@ param(
     end
     {
         try {
+            # Reset internal hook for being invoked from Compat module
+            try {
+                [Microsoft.PowerShell.PSResourceGet.UtilClasses.InternalHooks]::SetTestHook("InvokedFromCompat", $false)
+            }
+            catch {
+                # Ignore if not available
+            }
+
             $steppablePipeline.End()
         } catch {
             throw

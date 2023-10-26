@@ -1,4 +1,8 @@
 # Changelog
+### 3.0.23-beta23
+* Changes
+- Add internal hook for PSResourceGet telemetry
+
 ### 3.0.22-beta22
 * Changes
 - This module was renamed from 'CompatPowerShellGet' to 'PowerShellGet'

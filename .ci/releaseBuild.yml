@@ -98,13 +98,12 @@ stages:
           **\*.psm1
         useMinimatch: true
 
-    - ${{ if ne(variables.SkipSigning, 'True') }}:
-      - template: Sbom.yml@ComplianceRepo
-        parameters:
-          BuildDropPath: $(signOutPath)
-          Build_Repository_Uri: 'https://github.com/powershell/powershellget'
-          PackageName: 'PowerShellGet'
-          PackageVersion: '3.0.23-beta23'
+    - template: Sbom.yml@ComplianceRepo
+      parameters:
+        BuildDropPath: $(signOutPath)
+        Build_Repository_Uri: 'https://github.com/powershell/powershellget'
+        PackageName: 'PowerShellGet'
+        PackageVersion: $moduleVersion
 
     # Register local folder as PSRepository
     # Then publish-module to that folder 

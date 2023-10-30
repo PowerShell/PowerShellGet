@@ -105,7 +105,6 @@ stages:
         PackageName: 'PowerShellGet'
         PackageVersion: '$(moduleVersion)'
 
-
     # Register local folder as PSRepository
     # Then publish-module to that folder 
     - pwsh: |

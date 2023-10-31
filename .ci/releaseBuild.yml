@@ -108,7 +108,6 @@ stages:
     - pwsh: |
         Set-PSRepository PSGallery -InstallationPolicy Trusted
         Install-Module "Microsoft.PowerShell.PSResourceGet" -Repository PSGallery
-        Import-Module "Microsoft.PowerShell.PSResourceGet"
       displayName: Install and import Microsoft.PowerShell.PSResourceGet
 
     # Register local folder as PSRepository

@@ -105,8 +105,13 @@ stages:
         PackageName: 'PowerShellGet'
         PackageVersion: '$(moduleVersion)'
 
+    - pwsh: |
+        Set-PSRepository PSGallery -InstallationPolicy Trusted
+        Install-Module "Microsoft.PowerShell.PSResourceGet" -Repository PSGallery
+      displayName: Install and import Microsoft.PowerShell.PSResourceGet
+
     # Register local folder as PSRepository
-    # Then publish-module to that folder 
+    # Then publish module to that folder 
     - pwsh: |
         $localRepo = "$(Build.SourcesDirectory)/local"  
         New-Item -Path $localRepo -ItemType Directory -Force
@@ -114,8 +119,8 @@ stages:
         Write-Host "local repo is: " + $vstsCommandString
         Write-Host "##$vstsCommandString"
 
-        Register-PSRepository -Name local -SourceLocation $localRepo
-        Publish-Module -Path $(signOutPath) -Repository local
+        Register-PSResourceRepository -Name local -URI $localRepo
+        Publish-PSResource -Path $(signOutPath) -Repository local
       displayName: Publish module to local repository
 
     # finally publish the parts of the build which will be used in the next stages

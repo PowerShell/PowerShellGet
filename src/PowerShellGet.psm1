@@ -276,10 +276,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Find-Command
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Find-DscResource {
@@ -401,10 +397,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Find-DscResource
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Find-Module {
@@ -557,10 +549,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Find-Module
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Find-RoleCapability {
@@ -620,10 +608,6 @@ param(
         # Find-RoleCability is no longer supported
         Write-Warning -Message "The cmdlet 'Find-RoleCapability' is deprecated."
     }
-    <#
-    .ForwardHelpTargetName Find-RoleCapability
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Find-Script {
@@ -767,10 +751,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Find-Script
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Get-InstalledModule {
@@ -867,10 +847,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Get-InstalledModule
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Get-InstalledScript {
@@ -963,10 +939,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Get-InstalledScript
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Get-PSRepository {
@@ -1028,10 +1000,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Get-PSRepository
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Install-Module {
@@ -1177,10 +1145,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Install-Module
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Install-Script {
@@ -1320,10 +1284,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Install-Script
-    .ForwardHelpCategory Function
-    #>
 }
 
 function New-ScriptFileInfo {
@@ -1469,10 +1429,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Test-ScriptFileInfo
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Publish-Module {
@@ -1612,10 +1568,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Publish-Module
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Publish-Script {
@@ -1707,10 +1659,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Publish-Script
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Register-PSRepository {
@@ -1840,10 +1788,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Register-PSRepository
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Save-Module {
@@ -1992,10 +1936,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Save-Module
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Save-Script {
@@ -2143,10 +2083,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Save-Script
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Set-PSRepository {
@@ -2270,10 +2206,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Set-PSRepository
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Test-ScriptFileInfo {
@@ -2346,10 +2278,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Test-ScriptFileInfo
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Uninstall-Module {
@@ -2458,10 +2386,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Uninstall-Module
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Uninstall-Script {
@@ -2565,10 +2489,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Uninstall-Script
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Unregister-PSRepository {
@@ -2634,10 +2554,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Unregister-PSRepository
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Update-Module {
@@ -2755,10 +2671,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Update-Module
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Update-Script {
@@ -2873,10 +2785,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Update-Script
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Update-ModuleManifest {
@@ -3017,10 +2925,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Update-ModuleManifest
-    .ForwardHelpCategory Function
-    #>
 }
 
 function Update-ScriptFileInfo {
@@ -3171,10 +3075,6 @@ param(
             throw
         }
     }
-    <#
-    .ForwardHelpTargetName Update-ScriptFileInfo
-    .ForwardHelpCategory Function
-    #>
 }
 
 New-Alias -Name fimo -Value Find-Module

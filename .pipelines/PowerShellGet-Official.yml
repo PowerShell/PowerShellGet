@@ -74,7 +74,7 @@ extends:
         - name: ob_sdl_tsa_configFile
           value: $(Build.SourcesDirectory)\PowerShellGet\.config\tsaoptions.json
         - name: signSrcPath
-          value: $(repoRoot)/out
+          value: $(repoRoot)
         - name: ob_sdl_sbom_enabled
           value: true
         - name: ob_signing_setup_enabled
@@ -111,6 +111,11 @@ extends:
             signing_profile: external_distribution
             files_to_sign: '**\*.psd1;**\*.psm1;**\*.ps1xml'
             search_root: $(signSrcPath)
+
+        - pwsh: |
+            Write-Host "Displaying contents of signSrcPath:"
+            Get-ChildItem $(signSrcPath) -Recurse
+          displayName: Get contents of signSrcPath
 
         - task: CopyFiles@2
           displayName: "Copy signed files to ob_outputDirectory - '$(ob_outputDirectory)'"

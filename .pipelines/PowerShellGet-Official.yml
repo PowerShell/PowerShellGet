@@ -74,7 +74,7 @@ extends:
         - name: ob_sdl_tsa_configFile
           value: $(Build.SourcesDirectory)\PowerShellGet\.config\tsaoptions.json
         - name: signSrcPath
-          value: $(repoRoot)/out
+          value: $(repoRoot)/out/PowerShellGet
         - name: ob_sdl_sbom_enabled
           value: true
         - name: ob_signing_setup_enabled
@@ -163,6 +163,10 @@ extends:
             value: false
           - name: signOutPath
             value: $(repoRoot)/signed
+          - name: signedModuleRoot
+            value: $(signOutPath)/PowerShellGet
+          - name: signedNupkgPath
+            value: $(signOutPath)/PublishedNupkg
           - name: ob_signing_setup_enabled
             value: true
          # This job is not compiling code, so disable codeQL
@@ -184,13 +188,13 @@ extends:
         - task: DownloadPipelineArtifact@2
           displayName: 'Download build files'
           inputs:
-            targetPath: $(signOutPath)
+            targetPath: $(signedModuleRoot)
             artifact: drop_stagebuild_jobbuild
 
         - pwsh: |
-            Set-Location "$(signOutPath)"
-            Write-Host "Contents of signOutPath:"
-            Get-ChildItem $(signOutPath) -Recurse
+            Set-Location "$(signedModuleRoot)"
+            Write-Host "Contents of signedModuleRoot:"
+            Get-ChildItem $(signedModuleRoot) -Recurse
           displayName: Capture artifacts directory structure
 
         - pwsh: |
@@ -201,10 +205,10 @@ extends:
           displayName: Install PSResourceGet 0.9.0 or above for build.psm1
 
         - pwsh: |
-            Set-Location "$(signOutPath)\PowerShellGet"
-            New-Item -ItemType Directory -Path "$(signOutPath)\PublishedNupkg" -Force
-            Register-PSResourceRepository -Name 'localRepo' -Uri "$(signOutPath)\PublishedNupkg"
-            Publish-PSResource -Path "$(signOutPath)\PowerShellGet" -Repository 'localRepo' -Verbose
+            Set-Location "$(signOutPath)"
+            New-Item -ItemType Directory -Path "$(signedNupkgPath)" -Force
+            Register-PSResourceRepository -Name 'localRepo' -Uri "$(signedNupkgPath)"
+            Publish-PSResource -Path "$(signedModuleRoot)" -Repository 'localRepo' -Verbose
           displayName: Create nupkg for publishing
 
         - task: onebranch.pipeline.signing@1
@@ -213,18 +217,18 @@ extends:
             command: 'sign'
             signing_profile: external_distribution
             files_to_sign: '**\*.nupkg'
-            search_root: "$(signOutPath)\PublishedNupkg"
+            search_root: "$(signedNupkgPath)"
 
         - pwsh: |
-            Set-Location "$(signOutPath)\PublishedNupkg"
-            Write-Host "Contents of signOutPath:"
-            Get-ChildItem "$(signOutPath)" -Recurse 
+            Set-Location "$(signedNupkgPath)"
+            Write-Host "Contents of signedNupkgPath:"
+            Get-ChildItem "$(signedNupkgPath)" -Recurse 
           displayName: Find Nupkg
 
         - task: CopyFiles@2
           displayName: "Copy nupkg to ob_outputDirectory - '$(ob_outputDirectory)'"
           inputs:
-            Contents: $(signOutPath)\PublishedNupkg\PowerShellGet.*.nupkg
+            Contents: $(signedNupkgPath)\PowerShellGet.*.nupkg
             TargetFolder: $(ob_outputDirectory)
         
         - pwsh: |

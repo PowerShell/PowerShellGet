@@ -113,8 +113,8 @@ extends:
             Get-ChildItem $(repoRoot)/src/PowerShellGet.psd1
             Get-ChildItem $(repoRoot)/src/PowerShellGet.psm1
 
-            Copy-Item $(repoRoot)/src/PowerShellGet.psd1 $(signSrcPath) -Verbose
-            Copy-Item $(repoRoot)/src/PowerShellGet.psm1 $(signSrcPath) -Verbose
+            Copy-Item $(repoRoot)/src/PowerShellGet.psd1 $(signSrcPath)/PowerShellGet.psd1 -Verbose
+            Copy-Item $(repoRoot)/src/PowerShellGet.psm1 $(signSrcPath)/PowerShellGet.psm1 -Verbose
           displayName: Copy files to be signed to signSrcPath
 
         - task: onebranch.pipeline.signing@1

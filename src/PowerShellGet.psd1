@@ -8,7 +8,7 @@
 
 @{
     RootModule = 'PowerShellGet.psm1'
-    ModuleVersion = '3.0.23'
+    ModuleVersion = '3.0.222'
     GUID = '68ec3ec1-55bf-42f8-9add-d224e5c76548'
     Author = 'Microsoft Corporation'
     CompanyName = 'Microsoft Corporation'

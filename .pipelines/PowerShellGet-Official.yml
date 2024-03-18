@@ -74,7 +74,7 @@ extends:
         - name: ob_sdl_tsa_configFile
           value: $(Build.SourcesDirectory)\PowerShellGet\.config\tsaoptions.json
         - name: signSrcPath
-          value: $(repoRoot)
+          value: $(repoRoot)/out
         - name: ob_sdl_sbom_enabled
           value: true
         - name: ob_signing_setup_enabled
@@ -103,6 +103,16 @@ extends:
           displayName: Capture Environment
           env:
             ob_restore_phase: true # Set ob_restore_phase to run this step before '🔒 Setup Signing' step.
+
+        - pwsh: |
+            Write-Host "Displaying contents of repoRoot:"
+            Get-ChildItem  $(repoRoot) -Recurse
+          displayName: Get contents of repoRoot
+
+        - pwsh: |
+            Copy-Item $(repoRoot)/src/PowerShellGet.psd1 $(signSrcPath)/PowerShellGet.psd1 -Force
+            Copy-Item $(repoRoot)/src/PowerShellGet.psm1 $(signSrcPath)/PowerShellGet.psm1 -Force
+          displayName: Copy files to be signed to signSrcPath
 
         - task: onebranch.pipeline.signing@1
           displayName: Sign 1st party files

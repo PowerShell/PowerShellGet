@@ -110,8 +110,8 @@ extends:
           displayName: Get contents of repoRoot
 
         - pwsh: |
-            Copy-Item $(repoRoot)/src/PowerShellGet.psd1 $(signSrcPath)/PowerShellGet.psd1 -Force
-            Copy-Item $(repoRoot)/src/PowerShellGet.psm1 $(signSrcPath)/PowerShellGet.psm1 -Force
+            Copy-Item $(repoRoot)/src/PowerShellGet.psd1 $(signSrcPath) -Force
+            Copy-Item $(repoRoot)/src/PowerShellGet.psm1 $(signSrcPath) -Force
           displayName: Copy files to be signed to signSrcPath
 
         - task: onebranch.pipeline.signing@1

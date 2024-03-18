@@ -108,6 +108,10 @@ extends:
             Write-Host "Displaying contents of repoRoot:"
             Get-ChildItem  $(repoRoot) -Recurse
           displayName: Get contents of repoRoot
+        
+        - pwsh: |
+            New-Item -ItemType Directory -Path $(signSrcPath) -Force
+          displayName: Make signSrcPath directory
 
         - pwsh: |
             Get-ChildItem $(repoRoot)/src/PowerShellGet.psd1

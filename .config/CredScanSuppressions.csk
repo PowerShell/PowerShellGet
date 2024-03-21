@@ -1,9 +1,0 @@
-{
-    "tool": "Credential Scanner",
-    "suppressions": [
-      {
-        "file": "Test/PublishPSResource.Tests.ps1",
-        "_justification": "Auto generated fake key"
-      }
-    ]
-  }

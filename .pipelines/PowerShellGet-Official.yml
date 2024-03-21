@@ -1,0 +1,282 @@
+#################################################################################
+#                               OneBranch Pipelines                             #
+# This pipeline was created by EasyStart from a sample located at:              #
+#   https://aka.ms/obpipelines/easystart/samples                                #
+# Documentation:  https://aka.ms/obpipelines                                    #
+# Yaml Schema:    https://aka.ms/obpipelines/yaml/schema                        #
+# Retail Tasks:   https://aka.ms/obpipelines/tasks                              #
+# Support:        https://aka.ms/onebranchsup                                   #
+#################################################################################
+name: PowerShellGet-Release-$(Build.BuildId)
+trigger: none # https://aka.ms/obpipelines/triggers
+pr:
+  branches:
+    include:
+    - main
+    - release*
+parameters: # parameters are shown up in ADO UI in a build queue time
+- name: 'debug'
+  displayName: 'Enable debug output'
+  type: boolean
+  default: false
+
+variables:
+  - name: DOTNET_CLI_TELEMETRY_OPTOUT
+    value: 1
+  - name: POWERSHELL_TELEMETRY_OPTOUT
+    value: 1
+  - name: WindowsContainerImage
+    value: onebranch.azurecr.io/windows/ltsc2022/vse2022:latest # Docker image which is used to build the project https://aka.ms/obpipelines/containers
+
+resources:
+  repositories: 
+    - repository: onebranchTemplates
+      type: git
+      name: OneBranch.Pipelines/GovernedTemplates
+      ref: refs/heads/main
+
+extends:
+  template: v2/OneBranch.Official.CrossPlat.yml@onebranchTemplates # https://aka.ms/obpipelines/templates
+  parameters:
+    featureFlags:
+      WindowsHostVersion: '1ESWindows2022'
+    customTags: 'ES365AIMigrationTooling'
+    globalSdl:
+      disableLegacyManifest: true
+      sbom:
+        enabled: true
+        packageName: Microsoft.PowerShell.PowerShellGet
+      codeql:
+        compiled:
+          enabled: true
+      asyncSdl: # https://aka.ms/obpipelines/asyncsdl
+        enabled: true
+        forStages: [stagebuild]
+        credscan:
+          enabled: true
+          scanFolder:  $(Build.SourcesDirectory)\PowerShellGet
+        binskim:
+          enabled: true
+        apiscan:
+          enabled: false    
+
+    stages:
+    - stage: stagebuild
+      displayName: Build and Package PowerShellGet
+      jobs:
+      - job: jobbuild
+        displayName: Build PowerShellGet Files
+        variables: # More settings at https://aka.ms/obpipelines/yaml/jobs
+        - name: ob_outputDirectory
+          value: '$(Build.ArtifactStagingDirectory)/ONEBRANCH_ARTIFACT'
+        - name: repoRoot
+          value: $(Build.SourcesDirectory)\PowerShellGet
+        - name: ob_sdl_tsa_configFile
+          value: $(Build.SourcesDirectory)\PowerShellGet\.config\tsaoptions.json
+        - name: signSrcPath
+          value: $(repoRoot)/out/PowerShellGet
+        - name: ob_sdl_sbom_enabled
+          value: true
+        - name: ob_signing_setup_enabled
+          value: true
+        #CodeQL tasks added manually to workaround signing failures
+        - name: ob_sdl_codeql_compiled_enabled
+          value: false
+        pool:
+          type: windows
+        steps:
+        - checkout: self
+          env:
+            ob_restore_phase: true # Set ob_restore_phase to run this step before '🔒 Setup Signing' step.
+
+        - pwsh: |
+            if (-not (Test-Path $(repoRoot)/.config/tsaoptions.json)) {
+              Get-ChildItem $(Build.SourcesDirectory) -recurse -ErrorAction SilentlyContinue
+              throw "tsaoptions.json does not exist under $(repoRoot)/.config"
+            }
+          displayName: Test if tsaoptions.json exists
+          env:
+            ob_restore_phase: true # Set ob_restore_phase to run this step before '🔒 Setup Signing' step.
+
+        - pwsh: |
+            Get-ChildItem env:
+          displayName: Capture Environment
+          env:
+            ob_restore_phase: true # Set ob_restore_phase to run this step before '🔒 Setup Signing' step.
+
+        - pwsh: |
+            Write-Host "Displaying contents of repoRoot:"
+            Get-ChildItem  $(repoRoot) -Recurse
+          displayName: Get contents of repoRoot
+        
+        - pwsh: |
+            New-Item -ItemType Directory -Path $(signSrcPath) -Force
+          displayName: Make signSrcPath directory
+
+        - pwsh: |
+            Get-ChildItem $(repoRoot)/src/PowerShellGet.psd1
+            Get-ChildItem $(repoRoot)/src/PowerShellGet.psm1
+
+            Copy-Item $(repoRoot)/src/PowerShellGet.psd1 $(signSrcPath)/PowerShellGet.psd1 -Verbose
+            Copy-Item $(repoRoot)/src/PowerShellGet.psm1 $(signSrcPath)/PowerShellGet.psm1 -Verbose
+          displayName: Copy files to be signed to signSrcPath
+
+        - task: onebranch.pipeline.signing@1
+          displayName: Sign 1st party files
+          inputs:
+            command: 'sign'
+            signing_profile: external_distribution
+            files_to_sign: '**\*.psd1;**\*.psm1;**\*.ps1xml'
+            search_root: $(signSrcPath)
+
+        - pwsh: |
+            Write-Host "Displaying contents of signSrcPath:"
+            Get-ChildItem $(signSrcPath) -Recurse
+          displayName: Get contents of signSrcPath
+
+        - task: CopyFiles@2
+          displayName: "Copy signed files to ob_outputDirectory - '$(ob_outputDirectory)'"
+          inputs:
+            SourceFolder: "$(signSrcPath)"
+            Contents: '**'
+            TargetFolder: $(ob_outputDirectory)
+
+        - pwsh: |
+            Write-Host "Displaying contents of signSrcPath:"
+            Get-ChildItem $(signSrcPath) -Recurse
+            Write-Host "Displaying contents of ob_outputDirectory:"
+            Get-ChildItem $(ob_outputDirectory) -Recurse
+          displayName: Get contents of dirs with signed files
+
+      - job: nupkg
+        dependsOn: jobbuild
+        displayName: Package PowerShellGet
+        variables:
+          - name: ob_outputDirectory
+            value: '$(Build.ArtifactStagingDirectory)/ONEBRANCH_ARTIFACT'
+          - name: repoRoot
+            value: $(Build.SourcesDirectory)\PowerShellGet
+          - name: ob_sdl_tsa_configFile
+            value: $(Build.SourcesDirectory)\PowerShellGet\.config\tsaoptions.json
+         # Disable because SBOM was already built in the previous job
+          - name: ob_sdl_sbom_enabled
+            value: false
+          - name: signOutPath
+            value: $(repoRoot)/signed
+          - name: signedModuleRoot
+            value: $(signOutPath)/PowerShellGet
+          - name: signedNupkgPath
+            value: $(signOutPath)/PublishedNupkg
+          - name: ob_signing_setup_enabled
+            value: true
+         # This job is not compiling code, so disable codeQL
+          - name: ob_sdl_codeql_compiled_enabled
+            value: false
+
+        pool:
+          type: windows
+        steps:
+        - checkout: self
+
+        - pwsh: |
+            if (-not (Test-Path $(repoRoot)/.config/tsaoptions.json)) {
+              Get-ChildItem $(Build.SourcesDirectory) -recurse -ErrorAction SilentlyContinue
+              throw "tsaoptions.json does not exist under $(repoRoot)/.config"
+            }
+          displayName: Test if tsaoptions.json exists
+
+        - task: DownloadPipelineArtifact@2
+          displayName: 'Download build files'
+          inputs:
+            targetPath: $(signedModuleRoot)
+            artifact: drop_stagebuild_jobbuild
+
+        - pwsh: |
+            Set-Location "$(signedModuleRoot)"
+            Write-Host "Contents of signedModuleRoot:"
+            Get-ChildItem $(signedModuleRoot) -Recurse
+          displayName: Capture artifacts directory structure
+
+        - pwsh: |
+            $module = 'Microsoft.PowerShell.PSResourceGet'
+            Write-Verbose "installing $module..." -verbose
+            $ProgressPreference = 'SilentlyContinue'
+            Install-Module $module -AllowClobber -Force
+          displayName: Install PSResourceGet 0.9.0 or above for build.psm1
+
+        - pwsh: |
+            Set-Location "$(signOutPath)"
+            New-Item -ItemType Directory -Path "$(signedNupkgPath)" -Force
+            Register-PSResourceRepository -Name 'localRepo' -Uri "$(signedNupkgPath)"
+            Publish-PSResource -Path "$(signedModuleRoot)" -Repository 'localRepo' -Verbose
+          displayName: Create nupkg for publishing
+
+        - task: onebranch.pipeline.signing@1
+          displayName: Sign nupkg
+          inputs:
+            command: 'sign'
+            signing_profile: external_distribution
+            files_to_sign: '**\*.nupkg'
+            search_root: "$(signedNupkgPath)"
+
+        - pwsh: |
+            Set-Location "$(signedNupkgPath)"
+            Write-Host "Contents of signedNupkgPath:"
+            Get-ChildItem "$(signedNupkgPath)" -Recurse 
+          displayName: Find Nupkg
+
+        - task: CopyFiles@2
+          displayName: "Copy nupkg to ob_outputDirectory - '$(ob_outputDirectory)'"
+          inputs:
+            Contents: $(signedNupkgPath)\PowerShellGet.*.nupkg
+            TargetFolder: $(ob_outputDirectory)
+        
+        - pwsh: |
+            Write-Host "Contents of ob_outputDirectory:"
+            Get-ChildItem "$(ob_outputDirectory)" -Recurse 
+          displayName: Find Signed Nupkg
+
+    - stage: release
+      displayName: Release PowerShellGet
+      dependsOn: stagebuild
+      variables:
+        version: $[ stageDependencies.build.main.outputs['package.version'] ]
+        drop: $(Pipeline.Workspace)/drop_build_main
+      jobs:
+      - job: validation
+        displayName: Manual validation
+        pool:
+          type: agentless
+        timeoutInMinutes: 1440
+        steps:
+        - task: ManualValidation@0
+          displayName: Wait 24 hours for validation
+          inputs:
+            instructions: Please validate the release
+            timeoutInMinutes: 1440
+      - job: PSGalleryPublish
+        displayName: Publish to PSGallery
+        dependsOn: validation
+        pool:
+          type: windows
+        variables:
+          ob_outputDirectory: '$(Build.ArtifactStagingDirectory)/ONEBRANCH_ARTIFACT'
+        steps:
+        - download: current
+          displayName: Download artifact
+
+        - pwsh: |
+            Get-ChildItem $(Pipeline.Workspace) -Recurse
+          displayName: Capture environment
+
+        - pwsh: |
+            Get-ChildItem "$(Pipeline.Workspace)/drop_stagebuild_nupkg" -Recurse
+          displayName: Find signed Nupkg
+
+        - task: NuGetCommand@2
+          displayName: Push PowerShellGet module artifacts to PSGallery feed
+          inputs:
+            command: push
+            packagesToPush: '$(Pipeline.Workspace)\drop_stagebuild_nupkg\PowerShellGet\signed\PublishedNupkg\PowerShellGet.*.nupkg'
+            nuGetFeedType: external
+            publishFeedCredentials: PSGet-PSGalleryPush
